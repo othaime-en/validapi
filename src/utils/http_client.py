@@ -1,4 +1,5 @@
 import requests
+import time
 from typing import Dict, Any, Optional, Union
 from urllib.parse import urljoin
 from src.config.settings import settings
@@ -27,14 +28,54 @@ class HTTPClient:
         
         self.max_retries = settings.get('validation.max_retries', 3)
     
-    def request(self, method, endpoint) -> requests.Response:
-        """
-        HTTP request
-        """
+    def request(self, 
+                method: str, 
+                endpoint: str, 
+                params: Optional[Dict] = None,
+                data: Optional[Union[Dict, str]] = None,
+                json: Optional[Dict] = None,
+                headers: Optional[Dict] = None) -> requests.Response:
+              
+        """Make an HTTP request with retries"""
+        url = urljoin(f"{self.base_url}/", endpoint.lstrip('/'))
         
-        # Prepare request arguments        
-        # Add retry logic later
+        # Prepare request arguments
+        request_args = {
+            'method': method,
+            'url': url,
+            'timeout': self.timeout
+        }
         
+        if params:
+            request_args['params'] = params
+        if data:
+            request_args['data'] = data
+        if json:
+            request_args['json'] = json
+        if headers:
+            request_args['headers'] = headers
+        
+        # Retry logic
+        last_exception = None
+        for attempt in range(self.max_retries + 1):
+            try:
+                response = self.session.request(**request_args)
+                return response
+                
+            except requests.RequestException as e:
+                last_exception = e
+                if attempt == self.max_retries:
+                    raise e
+                
+                # Wait before retrying (exponential backoff)
+                wait_time = 2 ** attempt
+                time.sleep(wait_time)
+        
+        # This should never be reached, but just in case
+        if last_exception:
+            raise last_exception
+    
+          
     
     def get(self, endpoint) -> requests.Response:
         """
