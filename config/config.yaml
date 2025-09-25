@@ -1,0 +1,23 @@
+# API Validator Configuration
+
+validation:
+  strict_mode: true
+  timeout: 30
+  max_retries: 3
+  validate_examples: true
+
+reporting:
+  output_format: "html" # html, json, xml, console
+  output_dir: "reports"
+  include_request_details: true
+  include_response_body: true
+  max_response_body_size: 1024 # Max characters to include in report
+
+http:
+  headers:
+    User-Agent: "API-Validator/1.0"
+    Accept: "application/json"
+  follow_redirects: true
+  verify_ssl: true
+  connection_timeout: 10
+  read_timeout: 30
