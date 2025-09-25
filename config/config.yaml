@@ -1,17 +1,19 @@
 # API Validator Configuration
 
 validation:
-  strict_mode: true
-  timeout: 30
-  max_retries: 3
-  validate_examples: true
+  strict_mode: true # Fail on any validation error
+  timeout: 30 # Request timeout in seconds
+  max_retries: 3 # Maximum retry attempts
+  validate_examples: true # Validate example responses in spec
+  validate_headers: true # Validate response headers
+  validate_status_codes: true # Validate expected status codes
 
 reporting:
   output_format: "html" # html, json, xml, console
   output_dir: "reports"
   include_request_details: true
   include_response_body: true
-  max_response_body_size: 1024 # Max characters to include in report
+  max_response_body_size: 2048 # Max chars to include in report
 
 http:
   headers:
@@ -21,3 +23,10 @@ http:
   verify_ssl: true
   connection_timeout: 10
   read_timeout: 30
+
+# Test execution settings
+execution:
+  parallel_requests: false
+  max_workers: 4
+  delay_between_requests: 0 # seconds
+  stop_on_first_failure: false
