@@ -77,12 +77,22 @@ class HTTPClient:
     
           
     
-    def get(self, endpoint) -> requests.Response:
-        """
-        GET request
-        """
+    def get(self, endpoint: str, **kwargs) -> requests.Response:
+        """Make GET request"""
+        return self.request('GET', endpoint, **kwargs)
     
-    def post(self, endpoint) -> requests.Response:
-        """
-        POST request
-        """
+    def post(self, endpoint: str, **kwargs) -> requests.Response:
+        """Make POST request"""
+        return self.request('POST', endpoint, **kwargs)
+    
+    def put(self, endpoint: str, **kwargs) -> requests.Response:
+        """Make PUT request"""
+        return self.request('PUT', endpoint, **kwargs)
+    
+    def delete(self, endpoint: str, **kwargs) -> requests.Response:
+        """Make DELETE request"""
+        return self.request('DELETE', endpoint, **kwargs)
+    
+    def patch(self, endpoint: str, **kwargs) -> requests.Response:
+        """Make PATCH request"""
+        return self.request('PATCH', endpoint, **kwargs)
