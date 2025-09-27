@@ -15,11 +15,17 @@ class OpenAPIParser:
     
     def load_spec(self) -> Dict[str, Any]:
         # Load OpenAPI specification from file
-        with open(self.spec_path, 'r', encoding='utf-8') as file:
-            if self.spec_path.suffix.lower() in ['.yaml', '.yml']:
-                return yaml.safe_load(file)
-            else:
-                return json.load(file)
+        if not self.spec_path.exists():
+            raise FileNotFoundError(f"Spec file not found: {self.spec_path}")
+
+        try:
+            with open(self.spec_path, 'r', encoding='utf-8') as file:
+                if self.spec_path.suffix.lower() in ['.yaml', '.yml']:
+                    return yaml.safe_load(file)
+                else:
+                    return json.load(file)
+        except (yaml.YAMLError, json.JSONDecodeError) as e:
+            raise ValueError(f"Invalid spec file format: {e}")
     
     def get_endpoint(self, path: str, method: str) -> Optional[Dict[str, Any]]:
         # Get specific endpoint information
@@ -36,7 +42,7 @@ class OpenAPIParser:
             'summary': operation.get('summary', ''),
             'description': operation.get('description', ''),
             'parameters': operation.get('parameters', []),
-            'request_body': operation.get('request_body', {}),
+            'request_body': operation.get('requestBody', {}),
             'responses': operation.get('responses', {}),
             'tags': operation.get('tags', []),
             'security': operation.get('security',[])
