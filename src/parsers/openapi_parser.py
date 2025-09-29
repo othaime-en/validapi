@@ -50,6 +50,17 @@ class OpenAPIParser:
        
 
     def get_parameters(self, path: str, method: str) -> List[Dict[str, Any]]:
-        # Get parameters for specific endpoint
+        """Get parameters for specific endpoint"""
+        endpoint = self.get_endpoint(path, method)
+        if not endpoint:
+            return []
+        
         parameters = []
+        for param in endpoint.get('parameters', []):
+            # Resolve $ref if present
+            if '$ref' in param:
+                param = self.resolve_reference(param['$ref'])
+            
+            parameters.append(param)
+        
         return parameters
