@@ -36,7 +36,23 @@ class HTTPClient:
                 json: Optional[Dict] = None,
                 headers: Optional[Dict] = None) -> requests.Response:
               
-        """Make an HTTP request with retries"""
+        """
+        Make HTTP request with retry logic
+        
+        Args:
+            method: HTTP method (GET, POST, etc.)
+            endpoint: API endpoint (relative to base_url)
+            params: Query parameters
+            data: Form data or raw body
+            json: JSON data
+            headers: Additional headers
+        
+        Returns:
+            requests.Response object
+        
+        Raises:
+            requests.RequestException: If all retry attempts fail
+        """
         url = urljoin(f"{self.base_url}/", endpoint.lstrip('/'))
         
         # Prepare request arguments
