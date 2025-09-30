@@ -49,6 +49,37 @@ class OpenAPIParser:
         }
        
 
+    def get_all_endpoints(self) -> List[Dict[str, Any]]:
+        """Get all API endpoints from the specification"""
+        endpoints = []
+        
+        for path, path_item in self.paths.items():
+            for method, operation in path_item.items():
+                if method.lower() in ['get', 'post', 'put', 'delete', 'patch', 'head', 'options']:
+                    endpoint_info = {
+                        'path': path,
+                        'method': method.upper(),
+                        'operation_id': operation.get('operationId', f"{method}_{path}"),
+                        'summary': operation.get('summary', ''),
+                        'description': operation.get('description', ''),
+                        'parameters': operation.get('parameters', []),
+                        'request_body': operation.get('requestBody', {}),
+                        'responses': operation.get('responses', {}),
+                        'tags': operation.get('tags', []),
+                        'security': operation.get('security', [])
+                    }
+                    endpoints.append(endpoint_info)
+        
+        return endpoints
+    
+    def get_base_url(self) -> str:
+        """Extract base URL from specification"""
+        servers = self.spec.get('servers', [])
+        if servers:
+            return servers[0].get('url', '')
+        return ''
+    
+
     def get_parameters(self, path: str, method: str) -> List[Dict[str, Any]]:
         """Get parameters for specific endpoint"""
         endpoint = self.get_endpoint(path, method)
