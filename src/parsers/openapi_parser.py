@@ -163,3 +163,33 @@ class OpenAPIParser:
             parameters.append(param)
         
         return parameters
+    
+    def get_expected_status_codes(self, path: str, method: str) -> List[str]:
+        """Get list of expected status codes for endpoint"""
+        endpoint = self.get_endpoint(path, method)
+        if not endpoint:
+            return []
+        
+        responses = endpoint.get('responses', {})
+        return list(responses.keys())
+    
+    def validate_spec(self) -> List[str]:
+        """Basic validation of the OpenAPI specification"""
+        errors = []
+        
+        # Check required fields
+        if 'openapi' not in self.spec:
+            errors.append("Missing required 'openapi' field")
+        
+        if 'info' not in self.spec:
+            errors.append("Missing required 'info' field")
+        
+        if 'paths' not in self.spec:
+            errors.append("Missing required 'paths' field")
+        
+        # Check OpenAPI version
+        openapi_version = self.spec.get('openapi', '')
+        if not openapi_version.startswith('3.'):
+            errors.append(f"Unsupported OpenAPI version: {openapi_version}")
+        
+        return errors
