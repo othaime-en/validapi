@@ -80,6 +80,74 @@ class OpenAPIParser:
         return ''
     
 
+    def resolve_reference(self, ref: str) -> Dict[str, Any]:
+        """Resolve $ref references in the specification"""
+        if not ref.startswith('#/'):
+            raise ValueError(f"Only local references are supported: {ref}")
+        
+        path_parts = ref[2:].split('/')  # Remove '#/' prefix
+        current = self.spec
+        
+        for part in path_parts:
+            if not isinstance(current, dict) or part not in current:
+                raise ValueError(f"Reference not found: {ref}")
+            current = current[part]
+        
+        return current
+    
+    def get_response_schema(self, path: str, method: str, status_code: str) -> Optional[Dict[str, Any]]:
+        """Get response schema for specific endpoint and status code"""
+        endpoint = self.get_endpoint(path, method)
+        if not endpoint:
+            return None
+        
+        responses = endpoint['responses']
+        response = responses.get(status_code) or responses.get('default')
+        
+        if not response:
+            return None
+        
+        content = response.get('content', {})
+        
+        # Try common content types
+        for content_type in ['application/json', 'application/xml', 'text/plain']:
+            if content_type in content:
+                schema = content[content_type].get('schema', {})
+                
+                # Resolve $ref if present
+                if '$ref' in schema:
+                    schema = self.resolve_reference(schema['$ref'])
+                
+                return schema
+        
+        return None
+    
+
+    def get_request_schema(self, path: str, method: str) -> Optional[Dict[str, Any]]:
+        """Get request body schema for specific endpoint"""
+        endpoint = self.get_endpoint(path, method)
+        if not endpoint:
+            return None
+        
+        request_body = endpoint.get('request_body', {})
+        if not request_body:
+            return None
+        
+        content = request_body.get('content', {})
+        
+        # Try common content types
+        for content_type in ['application/json', 'application/xml']:
+            if content_type in content:
+                schema = content[content_type].get('schema', {})
+                
+                # Resolve $ref if present
+                if '$ref' in schema:
+                    schema = self.resolve_reference(schema['$ref'])
+                
+                return schema
+        
+        return None
+    
     def get_parameters(self, path: str, method: str) -> List[Dict[str, Any]]:
         """Get parameters for specific endpoint"""
         endpoint = self.get_endpoint(path, method)
