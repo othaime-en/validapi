@@ -96,4 +96,40 @@ class SchemaValidator(BaseValidator):
         
         return errors
     
+    def _validate_response_structure(self, data: Any, result: ValidationResult):
+        """Perform additional structural validations"""
+        
+        # Check for common API response patterns
+        if isinstance(data, dict):
+            # Check for error responses
+            if 'error' in data and isinstance(data['error'], str):
+                result.add_warning("Response contains error field", {
+                    'error_message': data['error']
+                })
+            
+            # Check for pagination patterns
+            if 'data' in data and isinstance(data['data'], list):
+                if 'page' in data or 'limit' in data or 'total' in data:
+                    result.details['pagination_detected'] = True
+            
+            # Check for empty required fields
+            self._check_empty_fields(data, result)
+    
+    def _check_empty_fields(self, data: Dict[str, Any], result: ValidationResult, path: str = ""):
+        """Check for empty or null required fields"""
+        for key, value in data.items():
+            current_path = f"{path}.{key}" if path else key
+            
+            if value is None:
+                result.add_warning(f"Null value found at {current_path}")
+            elif value == "":
+                result.add_warning(f"Empty string found at {current_path}")
+            elif isinstance(value, dict) and len(value) == 0:
+                result.add_warning(f"Empty object found at {current_path}")
+            elif isinstance(value, list) and len(value) == 0:
+                result.add_warning(f"Empty array found at {current_path}")
+            elif isinstance(value, dict):
+                self._check_empty_fields(value, result, current_path)
+
+
 
