@@ -1,4 +1,6 @@
-from typing import Any, Dict, Optional
+from abc import ABC, abstractmethod
+from typing import Any, Dict, List, Optional
+import requests
 
 class ValidationResult:
     """Container for validation results"""
@@ -43,3 +45,32 @@ class ValidationResult:
             'warnings': self.warnings
         }
 
+class BaseValidator(ABC):
+    """Base class for all validators"""
+    
+    def __init__(self, name: str):
+        self.name = name
+    
+    @abstractmethod
+    def validate(self, response: requests.Response, expected_schema: Dict[str, Any], **kwargs) -> ValidationResult:
+        """
+        Validate response against expected criteria
+        
+        Args:
+            response: HTTP response object
+            expected_schema: Expected schema/specification
+            **kwargs: Additional validation parameters
+        
+        Returns:
+            ValidationResult: Result of validation
+        """
+        pass
+    
+    def _create_error_result(self, message: str, details: Optional[Dict] = None) -> ValidationResult:
+        """Helper to create error result"""
+        result = ValidationResult(False, message, details)
+        return result
+    
+    def _create_success_result(self, message: str = "Validation passed") -> ValidationResult:
+        """Helper to create success result"""
+        return ValidationResult(True, message)
