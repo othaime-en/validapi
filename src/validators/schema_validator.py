@@ -1,8 +1,8 @@
 import json
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
 import requests
 import jsonschema
-from jsonschema import Draft7Validator
+from jsonschema import Draft7Validator, ValidationError
 from .base import BaseValidator, ValidationResult
 
 class SchemaValidator(BaseValidator):
@@ -170,4 +170,77 @@ class StatusCodeValidator(BaseValidator):
                 }
             )
 
-
+class HeaderValidator(BaseValidator):
+    """Validates HTTP response headers"""
+    
+    def __init__(self):
+        super().__init__("Header Validator")
+    
+    def validate(self, response: requests.Response, expected_schema: Dict[str, Any], **kwargs) -> ValidationResult:
+        """
+        Validate response headers
+        
+        Args:
+            response: HTTP response object
+            expected_schema: Schema containing expected headers
+            **kwargs: Additional validation parameters
+        
+        Returns:
+            ValidationResult: Validation result
+        """
+        result = ValidationResult(True)
+        expected_headers = kwargs.get('expected_headers', {})
+        
+        if not expected_headers:
+            return ValidationResult(True, "No expected headers specified")
+        
+        response_headers = {k.lower(): v for k, v in response.headers.items()}
+        
+        for header_name, expected_value in expected_headers.items():
+            header_name_lower = header_name.lower()
+            
+            if header_name_lower not in response_headers:
+                result.add_error(f"Missing expected header: {header_name}")
+                continue
+            
+            actual_value = response_headers[header_name_lower]
+            
+            # If expected_value is None, we just check for presence
+            if expected_value is not None and actual_value != expected_value:
+                result.add_error(
+                    f"Header value mismatch for {header_name}",
+                    {
+                        'expected': expected_value,
+                        'actual': actual_value
+                    }
+                )
+        
+        # Check for security headers
+        self._check_security_headers(response_headers, result)
+        
+        if result.valid:
+            result.message = "Headers validation passed"
+        
+        return result
+    
+    def _check_security_headers(self, headers: Dict[str, str], result: ValidationResult):
+        """Check for common security headers"""
+        security_headers = {
+            'x-content-type-options': 'nosniff',
+            'x-frame-options': None,  # Any value is good
+            'x-xss-protection': None,
+            'strict-transport-security': None,
+            'content-security-policy': None
+        }
+        
+        for header, expected_value in security_headers.items():
+            if header not in headers:
+                result.add_warning(f"Missing security header: {header}")
+            elif expected_value and headers[header] != expected_value:
+                result.add_warning(
+                    f"Security header {header} has unexpected value",
+                    {
+                        'expected': expected_value,
+                        'actual': headers[header]
+                    }
+                )
