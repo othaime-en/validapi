@@ -132,4 +132,42 @@ class SchemaValidator(BaseValidator):
                 self._check_empty_fields(value, result, current_path)
 
 
+class StatusCodeValidator(BaseValidator):
+    """Validates HTTP status codes"""
+    
+    def __init__(self):
+        super().__init__("Status Code Validator")
+    
+    def validate(self, response: requests.Response, expected_schema: Dict[str, Any], **kwargs) -> ValidationResult:
+        """
+        Validate response status code
+        
+        Args:
+            response: HTTP response object
+            expected_schema: Not used for status code validation
+            expected_codes: List of expected status codes
+        
+        Returns:
+            ValidationResult: Validation result
+        """
+        expected_codes = kwargs.get('expected_codes', [])
+        
+        if not expected_codes:
+            return ValidationResult(True, "No expected status codes specified")
+        
+        actual_code = response.status_code
+        expected_codes_str = [str(code) for code in expected_codes]
+        
+        if str(actual_code) in expected_codes_str:
+            return ValidationResult(True, f"Status code {actual_code} is expected")
+        else:
+            return self._create_error_result(
+                f"Unexpected status code: {actual_code}",
+                {
+                    'actual_code': actual_code,
+                    'expected_codes': expected_codes,
+                    'reason': response.reason
+                }
+            )
+
 
