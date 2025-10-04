@@ -71,3 +71,44 @@ class ValidationEngine:
     def _validate_response(self, response: requests.Response, endpoint_info: Dict[str, Any]) -> Dict[str, Any]:
         # Here, we will validate the response against specification
         pass
+
+    def _get_request_details(self, request: requests.PreparedRequest) -> Dict[str, Any]:
+        """Extract request details for reporting"""
+        details = {
+            'method': request.method,
+            'url': request.url,
+            'headers': dict(request.headers) if request.headers else {}
+        }
+        
+        if request.body:
+            # Try to parse JSON body
+            try:
+                if isinstance(request.body, bytes):
+                    body_str = request.body.decode('utf-8')
+                else:
+                    body_str = request.body
+                details['body'] = body_str
+            except:
+                details['body'] = '<Binary data>'
+        
+        return details
+    
+    def _get_response_details(self, response: requests.Response) -> Dict[str, Any]:
+        """Extract response details for reporting"""
+        details = {
+            'status_code': response.status_code,
+            'reason': response.reason,
+            'headers': dict(response.headers),
+            'size': len(response.content)
+        }
+        
+        # Include response body if configured and reasonable size
+        max_size = settings.get('reporting.max_response_body_size', 1024)
+        if settings.get('reporting.include_response_body', True) and len(response.content) <= max_size:
+            try:
+                details['body'] = response.text
+            except:
+                details['body'] = '<Unable to decode response body>'
+        
+        return details
+    
