@@ -1,3 +1,4 @@
+import time
 from typing import Dict, Any, List, Optional
 from pathlib import Path
 import requests
@@ -23,13 +24,90 @@ class ValidationEngine:
         self.results = []
     
     def validate_endpoint(self, path: str, method: str, test_data: Optional[Dict] = None) -> Dict[str, Any]:
-        # We validate a single endpoint
-        pass
-
-
+        """Validate a single endpoint"""
+        start_time = time.time()
+        
+        # Get endpoint information from spec
+        endpoint_info = self.parser.get_endpoint(path, method)
+        if not endpoint_info:
+            return {
+                'path': path,
+                'method': method,
+                'success': False,
+                'error': f'Endpoint not found in specification: {method} {path}',
+                'duration': 0
+            }
+        
+        try:
+            # Make HTTP request
+            response = self._make_request(path, method, test_data)
+            
+            # Validate response
+            validation_results = self._validate_response(response, endpoint_info)
+            
+            duration = time.time() - start_time
+            
+            result = {
+                'path': path,
+                'method': method,
+                'success': all(v['valid'] for v in validation_results.values()),
+                'status_code': response.status_code,
+                'response_time': duration,
+                'validations': validation_results,
+                'request_details': self._get_request_details(response.request),
+                'response_details': self._get_response_details(response),
+                'endpoint_info': {
+                    'operation_id': endpoint_info.get('operation_id'),
+                    'summary': endpoint_info.get('summary'),
+                    'tags': endpoint_info.get('tags', [])
+                }
+            }
+            
+            return result
+            
+        except requests.RequestException as e:
+            duration = time.time() - start_time
+            return {
+                'path': path,
+                'method': method,
+                'success': False,
+                'error': f'Request failed: {str(e)}',
+                'duration': duration,
+                'validations': {},
+                'request_details': {},
+                'response_details': {}
+            }
+    
     def validate_all_endpoints(self, test_data: Optional[Dict] = None) -> List[Dict[str, Any]]:
-        # Validate all endpoints in the specification
-        pass
+        """ Validate all endpoints in the specification """
+        endpoints = self.parser.get_all_endpoints()
+        results = []
+        
+        total_endpoints = len(endpoints)
+        print(f"Validating {total_endpoints} endpoints...")
+        
+        for i, endpoint in enumerate(endpoints, 1):
+            print(f"[{i}/{total_endpoints}] Testing {endpoint['method']} {endpoint['path']}")
+            
+            # Get test data for this specific endpoint
+            endpoint_test_data = test_data.get(endpoint['path'], {}).get(endpoint['method'].lower()) if test_data else None
+            
+            result = self.validate_endpoint(endpoint['path'], endpoint['method'], endpoint_test_data)
+            results.append(result)
+            
+            # Add delay between requests if configured
+            delay = settings.get('execution.delay_between_requests', 0)
+            if delay > 0:
+                time.sleep(delay)
+            
+            # Stop on first failure if configured
+            if not result['success'] and settings.get('execution.stop_on_first_failure', False):
+                print("Stopping on first failure as configured")
+                break
+        
+        self.results = results
+        return results
+    
 
     
     def _make_request(self, path: str, method: str, test_data: Optional[Dict] = None) -> requests.Response:
