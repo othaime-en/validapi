@@ -45,13 +45,28 @@ class ValidationEngine:
             json_data = test_data.get('json', None)
             headers = test_data.get('headers', {})
         
+        # Replace path parameters
+        final_path = self._replace_path_parameters(path, test_data)
+        
         return self.client.request(
             method=method,
-            endpoint=path,
+            endpoint=final_path,
             params=params,
             json=json_data,
             headers=headers
         )
+    
+    def _replace_path_parameters(self, path: str, test_data: Optional[Dict] = None) -> str:
+        """Replace path parameters with test values"""
+        if not test_data or 'path_params' not in test_data:
+            return path
+        
+        final_path = path
+        for param_name, param_value in test_data['path_params'].items():
+            final_path = final_path.replace(f'{{{param_name}}}', str(param_value))
+        
+        return final_path
+    
     
     def _validate_response(self, response: requests.Response, endpoint_info: Dict[str, Any]) -> Dict[str, Any]:
         # Here, we will validate the response against specification
