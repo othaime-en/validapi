@@ -69,8 +69,39 @@ class ValidationEngine:
     
     
     def _validate_response(self, response: requests.Response, endpoint_info: Dict[str, Any]) -> Dict[str, Any]:
-        # Here, we will validate the response against specification
-        pass
+        """Validate response against specification"""
+        validations = {}
+        
+        # Get expected status codes
+        expected_codes = self.parser.get_expected_status_codes(
+            endpoint_info['path'], 
+            endpoint_info['method']
+        )
+        
+        # Status code validation
+        status_result = self.validators['status_code'].validate(
+            response, {}, expected_codes=expected_codes
+        )
+        validations['status_code'] = status_result.to_dict()
+        
+        # Schema validation (only for successful responses)
+        if 200 <= response.status_code < 300:
+            response_schema = self.parser.get_response_schema(
+                endpoint_info['path'], 
+                endpoint_info['method'], 
+                str(response.status_code)
+            )
+            
+            if response_schema:
+                schema_result = self.validators['schema'].validate(response, response_schema)
+                validations['schema'] = schema_result.to_dict()
+        
+        # Header validation
+        header_result = self.validators['header'].validate(response, {})
+        validations['headers'] = header_result.to_dict()
+        
+        return validations
+    
 
     def _get_request_details(self, request: requests.PreparedRequest) -> Dict[str, Any]:
         """Extract request details for reporting"""
@@ -112,3 +143,19 @@ class ValidationEngine:
         
         return details
     
+    def get_summary(self) -> Dict[str, Any]:
+        """Get summary of validation results"""
+        if not self.results:
+            return {'total': 0, 'passed': 0, 'failed': 0, 'success_rate': 0}
+        
+        total = len(self.results)
+        passed = sum(1 for r in self.results if r['success'])
+        failed = total - passed
+        
+        return {
+            'total': total,
+            'passed': passed,
+            'failed': failed,
+            'success_rate': (passed / total * 100) if total > 0 else 0,
+            'average_response_time': sum(r.get('response_time', 0) for r in self.results) / total
+        }
