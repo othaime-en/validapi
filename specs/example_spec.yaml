@@ -1,0 +1,230 @@
+openapi: 3.0.3
+info:
+  title: Example API
+  description: Sample API for testing the validator
+  version: 1.0.0
+  contact:
+    email: admin@example.com
+
+servers:
+  - url: https://jsonplaceholder.typicode.com
+    description: JSONPlaceholder test server
+
+paths:
+  /posts:
+    get:
+      summary: Get all posts
+      description: Retrieve a list of all posts
+      tags:
+        - Posts
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Post"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Create a new post
+      description: Create a new blog post
+      tags:
+        - Posts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewPost"
+      responses:
+        "201":
+          description: Post created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Post"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /posts/{id}:
+    get:
+      summary: Get a specific post
+      description: Retrieve a post by its ID
+      tags:
+        - Posts
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Post ID
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Post"
+        "404":
+          description: Post not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /users:
+    get:
+      summary: Get all users
+      description: Retrieve a list of all users
+      tags:
+        - Users
+      parameters:
+        - name: limit
+          in: query
+          description: Maximum number of users to return
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+
+components:
+  schemas:
+    Post:
+      type: object
+      required:
+        - id
+        - title
+        - body
+        - userId
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the post
+        title:
+          type: string
+          description: Post title
+          minLength: 1
+          maxLength: 200
+        body:
+          type: string
+          description: Post content
+          minLength: 1
+        userId:
+          type: integer
+          description: ID of the user who created the post
+          minimum: 1
+    NewPost:
+      type: object
+      required:
+        - title
+        - body
+        - userId
+      properties:
+        title:
+          type: string
+          description: Post title
+          minLength: 1
+          maxLength: 200
+        body:
+          type: string
+          description: Post content
+          minLength: 1
+        userId:
+          type: integer
+          description: ID of the user creating the post
+          minimum: 1
+    User:
+      type: object
+      required:
+        - id
+        - name
+        - username
+        - email
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the user
+        name:
+          type: string
+          description: User's full name
+        username:
+          type: string
+          description: User's username
+        email:
+          type: string
+          format: email
+          description: User's email address
+        address:
+          $ref: "#/components/schemas/Address"
+        phone:
+          type: string
+          description: User's phone number
+        website:
+          type: string
+          format: uri
+          description: User's website
+        company:
+          $ref: "#/components/schemas/Company"
+    Address:
+      type: object
+      properties:
+        street:
+          type: string
+        suite:
+          type: string
+        city:
+          type: string
+        zipcode:
+          type: string
+        geo:
+          type: object
+          properties:
+            lat:
+              type: string
+            lng:
+              type: string
+    Company:
+      type: object
+      properties:
+        name:
+          type: string
+        catchPhrase:
+          type: string
+        bs:
+          type: string
+    Error:
+      type: object
+      required:
+        - error
+        - message
+      properties:
+        error:
+          type: string
+          description: Error type
+        message:
+          type: string
+          description: Error message
+        code:
+          type: integer
+          description: Error code
