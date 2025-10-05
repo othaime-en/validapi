@@ -24,7 +24,17 @@ class ValidationEngine:
         self.results = []
     
     def validate_endpoint(self, path: str, method: str, test_data: Optional[Dict] = None) -> Dict[str, Any]:
-        """Validate a single endpoint"""
+        """
+        Validate a single endpoint
+        
+        Args:
+            path: API endpoint path
+            method: HTTP method
+            test_data: Optional test data for request
+        
+        Returns:
+            Dict containing validation results
+        """        
         start_time = time.time()
         
         # Get endpoint information from spec
@@ -79,7 +89,15 @@ class ValidationEngine:
             }
     
     def validate_all_endpoints(self, test_data: Optional[Dict] = None) -> List[Dict[str, Any]]:
-        """ Validate all endpoints in the specification """
+        """
+        Validate all endpoints in the specification
+        
+        Args:
+            test_data: Optional test data for requests
+        
+        Returns:
+            List of validation results 
+        """
         endpoints = self.parser.get_all_endpoints()
         results = []
         
