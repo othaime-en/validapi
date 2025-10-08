@@ -2,7 +2,7 @@ import requests
 import time
 from typing import Dict, Any, Optional, Union
 from urllib.parse import urljoin
-from src.config.settings import settings
+from config.settings import settings
 
 class HTTPClient:
     """HTTP client for making API requests"""
