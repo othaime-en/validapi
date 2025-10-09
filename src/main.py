@@ -16,7 +16,9 @@ def cli():
 @click.option('--base-url', '-u', help='Base URL for API (overrides spec)')
 @click.option('--test-data', '-t', type=click.Path(exists=True), help='JSON file with test data')
 @click.option('--endpoint', '-e', help='Test specific endpoint (format: METHOD /path)')
-def validate(spec_file: str, base_url: Optional[str], test_data: Optional[str], endpoint: Optional[str]):
+@click.option('--verbose', '-v', is_flag=True, help='Verbose output')
+def validate(spec_file: str, base_url: Optional[str], test_data: Optional[str], 
+            endpoint: Optional[str], verbose: bool):
     """Validate API endpoints against OpenAPI specification"""
     try:
         engine = ValidationEngine(spec_file, base_url)
@@ -46,11 +48,53 @@ def validate(spec_file: str, base_url: Optional[str], test_data: Optional[str], 
             click.echo("[*] Testing all endpoints...")
             results = engine.validate_all_endpoints(test_data_dict)
         
-        click.echo(f"[*] Total endpoints tested: {len(results)}")
+        summary = engine.get_summary()
+        _display_console_results(results, summary, verbose)
+        
+        if summary['failed'] > 0:
+            sys.exit(1)
         
     except Exception as e:
         click.echo(f"[ERROR] Error: {str(e)}", err=True)
+        if verbose:
+            import traceback
+            traceback.print_exc()
         sys.exit(1)
+
+def _display_console_results(results, summary, verbose):
+    """Display results in console"""
+    click.echo("\n" + "="*60)
+    click.echo("[*] VALIDATION RESULTS")
+    click.echo("="*60)
+    
+    click.echo(f"[*] Total endpoints tested: {summary['total']}")
+    click.echo(f"[+] Passed: {summary['passed']}")
+    click.echo(f"[!] Failed: {summary['failed']}")
+    click.echo(f"[*] Success rate: {summary['success_rate']:.1f}%")
+    if 'average_response_time' in summary:
+        click.echo(f"[*] Average response time: {summary['average_response_time']*1000:.0f}ms")
+    
+    failed_results = [r for r in results if not r['success']]
+    if failed_results:
+        click.echo(f"\n[!] FAILED TESTS ({len(failed_results)}):")
+        for result in failed_results:
+            click.echo(f"   {result['method']} {result['path']}")
+            if 'error' in result:
+                click.echo(f"      Error: {result['error']}")
+            elif verbose and 'validations' in result:
+                for val_type, val_result in result['validations'].items():
+                    if not val_result['valid']:
+                        click.echo(f"      {val_type}: {val_result['message']}")
+                        if val_result['errors']:
+                            for error in val_result['errors'][:2]:
+                                click.echo(f"        - {error['message']}")
+    
+    if verbose:
+        click.echo(f"\n[+] PASSED TESTS ({summary['passed']}):")
+        passed_results = [r for r in results if r['success']]
+        for result in passed_results:
+            response_time = f" ({result['response_time']*1000:.0f}ms)" if 'response_time' in result else ""
+            click.echo(f"   {result['method']} {result['path']}{response_time}")
 
 if __name__ == '__main__':
     cli()
