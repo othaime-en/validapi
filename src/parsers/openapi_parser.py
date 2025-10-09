@@ -29,7 +29,7 @@ class OpenAPIParser:
     
     def get_endpoint(self, path: str, method: str) -> Optional[Dict[str, Any]]:
         # Get specific endpoint information
-        path_item = self.path.get(path, {})
+        path_item = self.paths.get(path, {})
         operation = path_item.get(method.lower(), {})
 
         if not operation:
