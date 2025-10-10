@@ -1,0 +1,25 @@
+{
+  "/posts": {
+    "post": {
+      "json": {
+        "title": "Test Post",
+        "body": "This is a test post created by the API validator",
+        "userId": 1
+      }
+    }
+  },
+  "/posts/{id}": {
+    "get": {
+      "path_params": {
+        "id": 1
+      }
+    }
+  },
+  "/users": {
+    "get": {
+      "params": {
+        "limit": 5
+      }
+    }
+  }
+}
