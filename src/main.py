@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import Optional
 import json
 from validation_engine import ValidationEngine
+from reporters.html_reporter import HTMLReporter, JSONReporter
 
 @click.group()
 @click.version_option(version='1.0.0')
@@ -15,10 +16,13 @@ def cli():
 @click.argument('spec_file', type=click.Path(exists=True))
 @click.option('--base-url', '-u', help='Base URL for API (overrides spec)')
 @click.option('--test-data', '-t', type=click.Path(exists=True), help='JSON file with test data')
+@click.option('--output-format', '-f', type=click.Choice(['html', 'json', 'console']), 
+              default='html', help='Output format for results')
+@click.option('--output-dir', '-o', default='reports', help='Output directory for reports')
 @click.option('--endpoint', '-e', help='Test specific endpoint (format: METHOD /path)')
 @click.option('--verbose', '-v', is_flag=True, help='Verbose output')
 def validate(spec_file: str, base_url: Optional[str], test_data: Optional[str], 
-            endpoint: Optional[str], verbose: bool):
+            output_format: str, output_dir: str, endpoint: Optional[str], verbose: bool):
     """Validate API endpoints against OpenAPI specification"""
     try:
         engine = ValidationEngine(spec_file, base_url)
@@ -49,7 +53,26 @@ def validate(spec_file: str, base_url: Optional[str], test_data: Optional[str],
             results = engine.validate_all_endpoints(test_data_dict)
         
         summary = engine.get_summary()
+        
         _display_console_results(results, summary, verbose)
+        
+        if output_format in ['html', 'json']:
+            spec_info = {
+                'spec_file': spec_file,
+                'base_url': base_url or engine.base_url,
+                'openapi_version': engine.parser.spec.get('openapi', 'unknown'),
+                'title': engine.parser.spec.get('info', {}).get('title', 'Unknown API'),
+                'version': engine.parser.spec.get('info', {}).get('version', 'unknown')
+            }
+            
+            if output_format == 'html':
+                reporter = HTMLReporter(output_dir)
+                report_path = reporter.generate_report(results, summary, spec_info)
+                click.echo(f"[+] HTML report generated: {report_path}")
+            else:
+                reporter = JSONReporter(output_dir)
+                report_path = reporter.generate_report(results, summary, spec_info)
+                click.echo(f"[+] JSON report generated: {report_path}")
         
         if summary['failed'] > 0:
             sys.exit(1)

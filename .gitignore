@@ -1,1 +1,9 @@
 \venv
+__pycache__/
+**/__pycache__/
+*.pyc
+reports/
+sample.py
+test.py
+exam2.html
+internal.md
