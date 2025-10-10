@@ -5,6 +5,7 @@ from typing import Optional
 import json
 from validation_engine import ValidationEngine
 from reporters.html_reporter import HTMLReporter, JSONReporter
+from parsers.openapi_parser import OpenAPIParser
 
 @click.group()
 @click.version_option(version='1.0.0')
@@ -118,6 +119,52 @@ def _display_console_results(results, summary, verbose):
         for result in passed_results:
             response_time = f" ({result['response_time']*1000:.0f}ms)" if 'response_time' in result else ""
             click.echo(f"   {result['method']} {result['path']}{response_time}")
+
+@cli.command()
+@click.argument('spec_file', type=click.Path(exists=True))
+def analyze(spec_file: str):
+    """Analyze OpenAPI specification and show endpoint summary"""
+    try:
+        parser = OpenAPIParser(spec_file)
+        endpoints = parser.get_all_endpoints()
+        
+        click.echo(f"[+] Analyzing specification: {spec_file}")
+        click.echo(f"[+] Base URL: {parser.base_url}")
+        
+        spec_info = parser.spec.get('info', {})
+        click.echo(f"[+] API: {spec_info.get('title', 'Unknown')} v{spec_info.get('version', 'unknown')}")
+        
+        if spec_info.get('description'):
+            click.echo(f"[*] Description: {spec_info['description']}")
+        
+        click.echo(f"\n[*] Found {len(endpoints)} endpoints:")
+        
+        by_tags = {}
+        for endpoint in endpoints:
+            tags = endpoint.get('tags', ['Untagged'])
+            for tag in tags:
+                if tag not in by_tags:
+                    by_tags[tag] = []
+                by_tags[tag].append(endpoint)
+        
+        for tag, tag_endpoints in by_tags.items():
+            click.echo(f"\n[*] {tag} ({len(tag_endpoints)} endpoints):")
+            for endpoint in tag_endpoints:
+                click.echo(f"   {endpoint['method']} {endpoint['path']}")
+                if endpoint.get('summary'):
+                    click.echo(f"      {endpoint['summary']}")
+        
+        errors = parser.validate_spec()
+        if errors:
+            click.echo(f"\n[!] Specification issues:")
+            for error in errors:
+                click.echo(f"   - {error}")
+        else:
+            click.echo(f"\n[+] Specification is valid")
+            
+    except Exception as e:
+        click.echo(f"[ERROR] Error analyzing specification: {str(e)}", err=True)
+        sys.exit(1)
 
 if __name__ == '__main__':
     cli()
