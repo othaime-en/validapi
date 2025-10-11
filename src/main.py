@@ -5,6 +5,7 @@ from typing import Optional
 import json
 from validation_engine import ValidationEngine
 from reporters.html_reporter import HTMLReporter, JSONReporter
+from config.settings import settings
 from parsers.openapi_parser import OpenAPIParser
 
 @click.group()
@@ -22,8 +23,10 @@ def cli():
 @click.option('--output-dir', '-o', default='reports', help='Output directory for reports')
 @click.option('--endpoint', '-e', help='Test specific endpoint (format: METHOD /path)')
 @click.option('--verbose', '-v', is_flag=True, help='Verbose output')
+@click.option('--strict', '-s', is_flag=True, help='Strict mode - fail on warnings')
 def validate(spec_file: str, base_url: Optional[str], test_data: Optional[str], 
-            output_format: str, output_dir: str, endpoint: Optional[str], verbose: bool):
+            output_format: str, output_dir: str, endpoint: Optional[str], 
+            verbose: bool, strict: bool):
     """Validate API endpoints against OpenAPI specification"""
     try:
         engine = ValidationEngine(spec_file, base_url)
@@ -32,6 +35,9 @@ def validate(spec_file: str, base_url: Optional[str], test_data: Optional[str],
         if test_data:
             with open(test_data, 'r') as f:
                 test_data_dict = json.load(f)
+        
+        if strict:
+            settings.update('validation.strict_mode', True)
         
         click.echo(f"[*] Starting API validation...")
         click.echo(f"[+] Spec file: {spec_file}")
@@ -164,6 +170,38 @@ def analyze(spec_file: str):
             
     except Exception as e:
         click.echo(f"[ERROR] Error analyzing specification: {str(e)}", err=True)
+        sys.exit(1)
+
+@cli.command()
+@click.option('--port', '-p', default=8080, help='Port for test server')
+def server(port: int):
+    """Start a test server for development"""
+    try:
+        from http.server import HTTPServer, SimpleHTTPRequestHandler
+        import threading
+        
+        class TestHandler(SimpleHTTPRequestHandler):
+            def do_GET(self):
+                if self.path == '/test':
+                    self.send_response(200)
+                    self.send_header('Content-type', 'application/json')
+                    self.end_headers()
+                    self.wfile.write(b'{"message": "Test endpoint working", "status": "success"}')
+                else:
+                    super().do_GET()
+        
+        server = HTTPServer(('localhost', port), TestHandler)
+        click.echo(f"[*] Starting test server on http://localhost:{port}")
+        click.echo("   Available endpoints:")
+        click.echo("   - GET /test (returns test JSON)")
+        click.echo("Press Ctrl+C to stop")
+        
+        server.serve_forever()
+        
+    except KeyboardInterrupt:
+        click.echo("\n[*] Server stopped")
+    except Exception as e:
+        click.echo(f"[ERROR] Error starting server: {str(e)}", err=True)
         sys.exit(1)
 
 if __name__ == '__main__':
