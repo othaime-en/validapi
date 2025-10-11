@@ -43,6 +43,82 @@ class HTMLReporter:
         # Load and render the HTML template
         template_str = '''
 <!DOCTYPE html>
+{% macro render_endpoint(result) %}
+<div class="endpoint">
+    <div class="endpoint-header">
+        <div class="endpoint-title">
+            <span class="method method-{{ result.method.lower() }}">{{ result.method }}</span>
+            {{ result.path }}
+            {% if result.endpoint_info.summary %}
+                <span style="color: #666; font-weight: normal; margin-left: 10px;">
+                    {{ result.endpoint_info.summary }}
+                </span>
+            {% endif %}
+        </div>
+        <div>
+            <span class="status-badge {% if result.success %}status-success{% else %}status-failure{% endif %}">
+                {% if result.success %}PASS{% else %}FAIL{% endif %}
+            </span>
+            {% if result.response_time %}
+                <span class="response-time">{{ "%.0f"|format(result.response_time * 1000) }}ms</span>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="endpoint-details">
+        {% if result.error %}
+            <div class="validation-item validation-failure">
+                <strong>Error:</strong> {{ result.error }}
+            </div>
+        {% else %}
+            <p><strong>Status Code:</strong> {{ result.status_code }}</p>
+            
+            {% if result.validations %}
+                <div class="validation-results">
+                    <h4>Validation Results:</h4>
+                    
+                    {% for validation_type, validation_result in result.validations.items() %}
+                        <div class="validation-item {% if validation_result.valid %}validation-success{% else %}validation-failure{% endif %}">
+                            <strong>{{ validation_type|title }} Validation:</strong> 
+                            {{ validation_result.message }}
+                            
+                            {% if validation_result.errors %}
+                                {% for error in validation_result.errors %}
+                                    <div class="error-details">
+                                        <strong>Error:</strong> {{ error.message }}
+                                        {% if error.details %}
+                                            <br><strong>Details:</strong> {{ error.details|tojson }}
+                                        {% endif %}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                            
+                            {% if validation_result.warnings %}
+                                {% for warning in validation_result.warnings %}
+                                    <div style="color: #856404; margin-top: 5px;">
+                                        <strong>Warning:</strong> {{ warning.message }}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
+            <!-- Request/Response Details -->
+            <button class="collapsible">Request Details</button>
+            <div class="collapsible-content">
+                <pre>{{ result.request_details|tojson(indent=2) }}</pre>
+            </div>
+            
+            <button class="collapsible">Response Details</button>
+            <div class="collapsible-content">
+                <pre>{{ result.response_details|tojson(indent=2) }}</pre>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endmacro %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -397,84 +473,8 @@ class HTMLReporter:
     </script>
 </body>
 </html>
-
-{% macro render_endpoint(result) %}
-<div class="endpoint">
-    <div class="endpoint-header">
-        <div class="endpoint-title">
-            <span class="method method-{{ result.method.lower() }}">{{ result.method }}</span>
-            {{ result.path }}
-            {% if result.endpoint_info.summary %}
-                <span style="color: #666; font-weight: normal; margin-left: 10px;">
-                    {{ result.endpoint_info.summary }}
-                </span>
-            {% endif %}
-        </div>
-        <div>
-            <span class="status-badge {% if result.success %}status-success{% else %}status-failure{% endif %}">
-                {% if result.success %}PASS{% else %}FAIL{% endif %}
-            </span>
-            {% if result.response_time %}
-                <span class="response-time">{{ "%.0f"|format(result.response_time * 1000) }}ms</span>
-            {% endif %}
-        </div>
-    </div>
-    
-    <div class="endpoint-details">
-        {% if result.error %}
-            <div class="validation-item validation-failure">
-                <strong>Error:</strong> {{ result.error }}
-            </div>
-        {% else %}
-            <p><strong>Status Code:</strong> {{ result.status_code }}</p>
-            
-            {% if result.validations %}
-                <div class="validation-results">
-                    <h4>Validation Results:</h4>
-                    
-                    {% for validation_type, validation_result in result.validations.items() %}
-                        <div class="validation-item {% if validation_result.valid %}validation-success{% else %}validation-failure{% endif %}">
-                            <strong>{{ validation_type|title }} Validation:</strong> 
-                            {{ validation_result.message }}
-                            
-                            {% if validation_result.errors %}
-                                {% for error in validation_result.errors %}
-                                    <div class="error-details">
-                                        <strong>Error:</strong> {{ error.message }}
-                                        {% if error.details %}
-                                            <br><strong>Details:</strong> {{ error.details|tojson }}
-                                        {% endif %}
-                                    </div>
-                                {% endfor %}
-                            {% endif %}
-                            
-                            {% if validation_result.warnings %}
-                                {% for warning in validation_result.warnings %}
-                                    <div style="color: #856404; margin-top: 5px;">
-                                        <strong>Warning:</strong> {{ warning.message }}
-                                    </div>
-                                {% endfor %}
-                            {% endif %}
-                        </div>
-                    {% endfor %}
-                </div>
-            {% endif %}
-            
-            <!-- Request/Response Details -->
-            <button class="collapsible">Request Details</button>
-            <div class="collapsible-content">
-                <pre>{{ result.request_details|tojson(indent=2) }}</pre>
-            </div>
-            
-            <button class="collapsible">Response Details</button>
-            <div class="collapsible-content">
-                <pre>{{ result.response_details|tojson(indent=2) }}</pre>
-            </div>
-        {% endif %}
-    </div>
-</div>
-{% endmacro %}
 '''
+        
         template = Template(template_str)
         return template.render(**data)
 
