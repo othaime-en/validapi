@@ -42,6 +42,9 @@ class HTMLReporter:
     
     def _render_template(self, data: Dict[str, Any]) -> str:
         # Load and render the HTML template from file
+        for file_name in ["report_template.html", "scripts.js", "styles.css"]:
+            if not (self.template_dir / file_name).exists():
+                raise FileNotFoundError(f"Template file '{file_name}' not found in '{self.template_dir}'")
         template = self.env.get_template('report_template.html')
         return template.render(**data)
 
