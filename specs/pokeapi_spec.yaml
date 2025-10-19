@@ -1,0 +1,7356 @@
+openapi: 3.1.0
+info:
+  title: PokéAPI
+  version: 2.7.0
+  description: "All the Pokémon data you'll ever need in one place, easily accessible\
+    \ through a modern free open-source RESTful API.\n\n## What is this?\n\nThis is\
+    \ a full RESTful API linked to an extensive database detailing everything about\
+    \ the Pokémon main game series.\n\nWe've covered everything from Pokémon to Berry\
+    \ Flavors.\n\n## Where do I start?\n\nWe have awesome [documentation](https://pokeapi.co/docs/v2)\
+    \ on how to use this API."
+servers:
+- url: https://pokeapi.co/api/v2
+paths:
+  /ability/{id_or_name}/:
+    get:
+      description: >-
+        Abilities provide implementation details of mechanics in the Pokémon
+        games. Abilities can affect the stats of a Pokémon or be called upon
+        when certain criteria are met in battle.
+      operationId: ability_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ability'
+          description: ''
+  /ability/:
+    get:
+      description: >-
+        Abilities provide implementation details of mechanics in the Pokémon
+        games. Abilities can affect the stats of a Pokémon or be called upon
+        when certain criteria are met in battle.
+      operationId: ability_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AbilityList'
+          description: ''
+  /berry-firmness/{id_or_name}/:
+    get:
+      description: >-
+        Berry Firmnesses identify the firmness of a berry, affecting how it can
+        be harvested from berry trees.
+      operationId: berry_firmness_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BerryFirmness'
+          description: ''
+  /berry-firmness/:
+    get:
+      description: >-
+        Berry Firmnesses identify the firmness of a berry, affecting how it can
+        be harvested from berry trees.
+      operationId: berry_firmness_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BerryFirmnessList'
+          description: ''
+  /berry-flavor/{id_or_name}/:
+    get:
+      description: >-
+        Berry Flavors have no direct effect on the battle but are used as
+        criteria for moves like Spit Up, Swallow and Natural Gift.
+      operationId: berry_flavor_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BerryFlavor'
+          description: ''
+  /berry-flavor/:
+    get:
+      description: >-
+        Berry Flavors have no direct effect on the battle but are used as
+        criteria for moves like Spit Up, Swallow and Natural Gift.
+      operationId: berry_flavor_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BerryFlavorList'
+          description: ''
+  /berry/{id_or_name}/:
+    get:
+      description: >-
+        Berries are small fruits that can be consumed and used to heal and
+        restore PP for Pokémon during battle. Some Berries can also be used to
+        influence the contests.
+      operationId: berry_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Berry'
+          description: ''
+  /berry/:
+    get:
+      description: >-
+        Berries are small fruits that can be consumed and used to heal and
+        restore PP for Pokémon during battle. Some Berries can also be used to
+        influence the contests.
+      operationId: berry_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BerryList'
+          description: ''
+  /characteristic/{id}/:
+    get:
+      description: >-
+        Characteristics indicate which stat contains a Pokémon's highest Individual
+        Value.
+      operationId: characteristic_read
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Characteristic'
+          description: ''
+  /characteristic/:
+    get:
+      description: >-
+        Characteristics indicate which stat contains a Pokémon's highest Individual
+        Value.
+      operationId: characteristic_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CharacteristicList'
+          description: ''
+  /contest-type/{id_or_name}/:
+    get:
+      description: >-
+        Contest Types were introduced in Generation III. Pokémon can participate
+        in Contests in different categories, each with its own set of conditions
+        and appeals.
+      operationId: contest_type_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContestType'
+          description: ''
+  /contest-type/:
+    get:
+      description: >-
+        Contest Types were introduced in Generation III. Pokémon can participate
+        in Contests in different categories, each with its own set of conditions
+        and appeals.
+      operationId: contest_type_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContestTypeList'
+          description: ''
+  /contest-effect/{id}/:
+    get:
+      description: >-
+        Contest Effects describe the effects of a Contest Move when used in a Contest.
+      operationId: contest_effect_read
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContestEffect'
+          description: ''
+  /contest-effect/:
+    get:
+      description: >-
+        Contest Effects describe the effects of a Contest Move when used in a Contest.
+      operationId: contest_effect_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContestEffectList'
+          description: ''
+  /egg-group/{id_or_name}/:
+    get:
+      description: >-
+        Egg Groups are categories of Pokémon used to determine breeding compatibility.
+      operationId: egg_group_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EggGroup'
+          description: ''
+  /egg-group/:
+    get:
+      description: >-
+        Egg Groups are categories of Pokémon used to determine breeding compatibility.
+      operationId: egg_group_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EggGroupList'
+          description: ''
+  /encounter-condition-value/{id_or_name}/:
+    get:
+      description: >-
+        Encounter Condition Values define the circumstances under which a Pokémon
+        can be encountered in the wild.
+      operationId: encounter_condition_value_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncounterConditionValue'
+          description: ''
+  /encounter-condition-value/:
+    get:
+      description: >-
+        Encounter Condition Values define the circumstances under which a Pokémon
+        can be encountered in the wild.
+      operationId: encounter_condition_value_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncounterConditionValueList'
+          description: ''
+  /encounter-condition/{id_or_name}/:
+    get:
+      description: >-
+        Encounter Conditions define the overall circumstances under which a Pokémon
+        can be encountered in the wild.
+      operationId: encounter_condition_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncounterCondition'
+          description: ''
+  /encounter-condition/:
+    get:
+      description: >-
+        Encounter Conditions define the overall circumstances under which a Pokémon
+        can be encountered in the wild.
+      operationId: encounter_condition_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncounterConditionList'
+          description: ''
+  /encounter-method/{id_or_name}/:
+    get:
+      description: >-
+        Encounter Methods define how a Pokémon can be encountered in the wild.
+      operationId: encounter_method_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncounterMethod'
+          description: ''
+  /encounter-method/:
+    get:
+      description: >-
+        Encounter Methods define how a Pokémon can be encountered in the wild.
+      operationId: encounter_method_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncounterMethodList'
+          description: ''
+  /evolution-chain/{id}/:
+    get:
+      description: >-
+        Evolution Chains define the evolutionary lines of Pokémon species.
+      operationId: evolution_chain_read
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvolutionChain'
+          description: ''
+  /evolution-chain/:
+    get:
+      description: >-
+        Evolution Chains define the evolutionary lines of Pokémon species.
+      operationId: evolution_chain_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvolutionChainList'
+          description: ''
+  /evolution-trigger/{id_or_name}/:
+    get:
+      description: >-
+        Evolution Triggers define the circumstances under which a Pokémon evolves.
+      operationId: evolution_trigger_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvolutionTrigger'
+          description: ''
+  /evolution-trigger/:
+    get:
+      description: >-
+        Evolution Triggers define the circumstances under which a Pokémon evolves.
+      operationId: evolution_trigger_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvolutionTriggerList'
+          description: ''
+  /flavor-text/{id}/:
+    get:
+      description: >-
+        Flavor Texts provide in-game descriptions of Pokémon items, abilities, etc.
+      operationId: flavor_text_read
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlavorText'
+          description: ''
+  /flavor-text/:
+    get:
+      description: >-
+        Flavor Texts provide in-game descriptions of Pokémon items, abilities, etc.
+      operationId: flavor_text_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlavorTextList'
+          description: ''
+  /form/{id_or_name}/:
+    get:
+      description: >-
+        Forms are alternate visual appearances of Pokémon species.
+      operationId: form_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PokemonForm'
+          description: ''
+  /form/:
+    get:
+      description: >-
+        Forms are alternate visual appearances of Pokémon species.
+      operationId: form_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PokemonFormList'
+          description: ''
+  /gender/{id_or_name}/:
+    get:
+      description: >-
+        Genders define the biological sex of Pokémon.
+      operationId: gender_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gender'
+          description: ''
+  /gender/:
+    get:
+      description: >-
+        Genders define the biological sex of Pokémon.
+      operationId: gender_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenderList'
+          description: ''
+  /generation/{id_or_name}/:
+    get:
+      description: >-
+        Generations define the Pokémon games grouped by release.
+      operationId: generation_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Generation'
+          description: ''
+  /generation/:
+    get:
+      description: >-
+        Generations define the Pokémon games grouped by release.
+      operationId: generation_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerationList'
+          description: ''
+  /growth-rate/{id_or_name}/:
+    get:
+      description: >-
+        Growth Rates define how a Pokémon's level increases over time.
+      operationId: growth_rate_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GrowthRate'
+          description: ''
+  /growth-rate/:
+    get:
+      description: >-
+        Growth Rates define how a Pokémon's level increases over time.
+      operationId: growth_rate_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GrowthRateList'
+          description: ''
+  /item-attribute/{id_or_name}/:
+    get:
+      description: >-
+        Item Attributes describe properties of Pokémon items.
+      operationId: item_attribute_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemAttribute'
+          description: ''
+  /item-attribute/:
+    get:
+      description: >-
+        Item Attributes describe properties of Pokémon items.
+      operationId: item_attribute_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemAttributeList'
+          description: ''
+  /item-category/{id_or_name}/:
+    get:
+      description: >-
+        Item Categories group Pokémon items by type.
+      operationId: item_category_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemCategory'
+          description: ''
+  /item-category/:
+    get:
+      description: >-
+        Item Categories group Pokémon items by type.
+      operationId: item_category_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemCategoryList'
+          description: ''
+  /item-fling-effect/{id_or_name}/:
+    get:
+      description: >-
+        Item Fling Effects describe the effects when an item is flung in battle.
+      operationId: item_fling_effect_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemFlingEffect'
+          description: ''
+  /item-fling-effect/:
+    get:
+      description: >-
+        Item Fling Effects describe the effects when an item is flung in battle.
+      operationId: item_fling_effect_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemFlingEffectList'
+          description: ''
+  /item-mega-stone/{id_or_name}/:
+    get:
+      description: >-
+        Item Mega Stones allow Pokémon to Mega Evolve.
+      operationId: item_mega_stone_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemMegaStone'
+          description: ''
+  /item-mega-stone/:
+    get:
+      description: >-
+        Item Mega Stones allow Pokémon to Mega Evolve.
+      operationId: item_mega_stone_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemMegaStoneList'
+          description: ''
+  /item/{id_or_name}/:
+    get:
+      description: >-
+        Items are consumables or tools that can be used in Pokémon games.
+      operationId: item_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Item'
+          description: ''
+  /item/:
+    get:
+      description: >-
+        Items are consumables or tools that can be used in Pokémon games.
+      operationId: item_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemList'
+          description: ''
+  /item-pocket/{id_or_name}/:
+    get:
+      description: >-
+        Item Pockets group items by category in the bag.
+      operationId: item_pocket_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemPocket'
+          description: ''
+  /item-pocket/:
+    get:
+      description: >-
+        Item Pockets group items by category in the bag.
+      operationId: item_pocket_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemPocketList'
+          description: ''
+  /language/{id_or_name}/:
+    get:
+      description: >-
+        Languages define the language used in-game.
+      operationId: language_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Language'
+          description: ''
+  /language/:
+    get:
+      description: >-
+        Languages define the language used in-game.
+      operationId: language_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LanguageList'
+          description: ''
+  /location-area/{id_or_name}/:
+    get:
+      description: >-
+        Location Areas define specific areas within a Location where Pokémon can be found.
+      operationId: location_area_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationArea'
+          description: ''
+  /location-area/:
+    get:
+      description: >-
+        Location Areas define specific areas within a Location where Pokémon can be found.
+      operationId: location_area_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationAreaList'
+          description: ''
+  /location/{id_or_name}/:
+    get:
+      description: >-
+        Locations are areas in the Pokémon world.
+      operationId: location_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+          description: ''
+  /location/:
+    get:
+      description: >-
+        Locations are areas in the Pokémon world.
+      operationId: location_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationList'
+          description: ''
+  /location-gamut/{id_or_name}/:
+    get:
+      description: >-
+        Location Gamuts group locations by game version.
+      operationId: location_gamut_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationGamut'
+          description: ''
+  /location-gamut/:
+    get:
+      description: >-
+        Location Gamuts group locations by game version.
+      operationId: location_gamut_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationGamutList'
+          description: ''
+  /machine/{id}/:
+    get:
+      description: >-
+        Machines contain Move learn methods in specific games.
+      operationId: machine_read
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Machine'
+          description: ''
+  /machine/:
+    get:
+      description: >-
+        Machines contain Move learn methods in specific games.
+      operationId: machine_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MachineList'
+          description: ''
+  /move-ailment/{id_or_name}/:
+    get:
+      description: >-
+        Move Ailments are status conditions caused by moves.
+      operationId: move_ailment_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoveAilment'
+          description: ''
+  /move-ailment/:
+    get:
+      description: >-
+        Move Ailments are status conditions caused by moves.
+      operationId: move_ailment_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoveAilmentList'
+          description: ''
+  /move-battle-style/{id_or_name}/:
+    get:
+      description: >-
+        Move Battle Styles define styles for moves in battles.
+      operationId: move_battle_style_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoveBattleStyle'
+          description: ''
+  /move-battle-style/:
+    get:
+      description: >-
+        Move Battle Styles define styles for moves in battles.
+      operationId: move_battle_style_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoveBattleStyleList'
+          description: ''
+  /move-category/{id_or_name}/:
+    get:
+      description: >-
+        Move Categories classify moves by damage type.
+      operationId: move_category_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoveCategory'
+          description: ''
+  /move-category/:
+    get:
+      description: >-
+        Move Categories classify moves by damage type.
+      operationId: move_category_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoveCategoryList'
+          description: ''
+  /move-damage-class/{id_or_name}/:
+    get:
+      description: >-
+        Move Damage Classes indicate if a move deals damage or not.
+      operationId: move_damage_class_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoveDamageClass'
+          description: ''
+  /move-damage-class/:
+    get:
+      description: >-
+        Move Damage Classes indicate if a move deals damage or not.
+      operationId: move_damage_class_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoveDamageClassList'
+          description: ''
+  /move-learn-method/{id_or_name}/:
+    get:
+      description: >-
+        Move Learn Methods define how Pokémon learn moves.
+      operationId: move_learn_method_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoveLearnMethod'
+          description: ''
+  /move-learn-method/:
+    get:
+      description: >-
+        Move Learn Methods define how Pokémon learn moves.
+      operationId: move_learn_method_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoveLearnMethodList'
+          description: ''
+  /move-target/{id_or_name}/:
+    get:
+      description: >-
+        Move Targets define who a move affects in battle.
+      operationId: move_target_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoveTarget'
+          description: ''
+  /move-target/:
+    get:
+      description: >-
+        Move Targets define who a move affects in battle.
+      operationId: move_target_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoveTargetList'
+          description: ''
+  /move/{id_or_name}/:
+    get:
+      description: >-
+        Moves are the skills of Pokémon in battle.
+      operationId: move_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Move'
+          description: ''
+  /move/:
+    get:
+      description: >-
+        Moves are the skills of Pokémon in battle.
+      operationId: move_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoveList'
+          description: ''
+  /nature/{id_or_name}/:
+    get:
+      description: >-
+        Natures affect the stats of a Pokémon.
+      operationId: nature_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Nature'
+          description: ''
+  /nature/:
+    get:
+      description: >-
+        Natures affect the stats of a Pokémon.
+      operationId: nature_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NatureList'
+          description: ''
+  /pal-park-area/{id_or_name}/:
+    get:
+      description: >-
+        Pal Park Areas are locations in Pokémon games for catching Pokémon.
+      operationId: pal_park_area_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PalParkArea'
+          description: ''
+  /pal-park-area/:
+    get:
+      description: >-
+        Pal Park Areas are locations in Pokémon games for catching Pokémon.
+      operationId: pal_park_area_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PalParkAreaList'
+          description: ''
+  /pokeathlon-stat/{id_or_name}/:
+    get:
+      description: >-
+        Pokéathlon Stats are stats used in the Pokéathlon minigames.
+      operationId: pokeathlon_stat_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PokeathlonStat'
+          description: ''
+  /pokeathlon-stat/:
+    get:
+      description: >-
+        Pokéathlon Stats are stats used in the Pokéathlon minigames.
+      operationId: pokeathlon_stat_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PokeathlonStatList'
+          description: ''
+  /pokemon-color/{id_or_name}/:
+    get:
+      description: >-
+        Pokémon Colors classify Pokémon by their primary color.
+      operationId: pokemon_color_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PokemonColor'
+          description: ''
+  /pokemon-color/:
+    get:
+      description: >-
+        Pokémon Colors classify Pokémon by their primary color.
+      operationId: pokemon_color_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PokemonColorList'
+          description: ''
+  /pokemon-form/{id_or_name}/:
+    get:
+      description: >-
+        Pokémon Forms are alternate visual appearances of Pokémon species.
+      operationId: pokemon_form_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PokemonForm'
+          description: ''
+  /pokemon-form/:
+    get:
+      description: >-
+        Pokémon Forms are alternate visual appearances of Pokémon species.
+      operationId: pokemon_form_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PokemonFormList'
+          description: ''
+  /pokemon-habitat/{id_or_name}/:
+    get:
+      description: >-
+        Pokémon Habitats describe where Pokémon live in the wild.
+      operationId: pokemon_habitat_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PokemonHabitat'
+          description: ''
+  /pokemon-habitat/:
+    get:
+      description: >-
+        Pokémon Habitats describe where Pokémon live in the wild.
+      operationId: pokemon_habitat_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PokemonHabitatList'
+          description: ''
+  /pokemon-shape/{id_or_name}/:
+    get:
+      description: >-
+        Pokémon Shapes classify Pokémon by their physical shape.
+      operationId: pokemon_shape_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PokemonShape'
+          description: ''
+  /pokemon-shape/:
+    get:
+      description: >-
+        Pokémon Shapes classify Pokémon by their physical shape.
+      operationId: pokemon_shape_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PokemonShapeList'
+          description: ''
+  /pokemon-species/{id_or_name}/:
+    get:
+      description: >-
+        Pokémon Species are the base form of Pokémon, excluding forms.
+      operationId: pokemon_species_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PokemonSpecies'
+          description: ''
+  /pokemon-species/:
+    get:
+      description: >-
+        Pokémon Species are the base form of Pokémon, excluding forms.
+      operationId: pokemon_species_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PokemonSpeciesList'
+          description: ''
+  /pokemon/{id_or_name}/:
+    get:
+      description: >-
+        Pokémon are the creatures that trainers catch and battle with.
+      operationId: pokemon_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pokemon'
+          description: ''
+  /pokemon/:
+    get:
+      description: >-
+        Pokémon are the creatures that trainers catch and battle with.
+      operationId: pokemon_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PokemonList'
+          description: ''
+  /region/{id_or_name}/:
+    get:
+      description: >-
+        Regions are areas in the Pokémon world, each with its own Pokémon League.
+      operationId: region_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Region'
+          description: ''
+  /region/:
+    get:
+      description: >-
+        Regions are areas in the Pokémon world, each with its own Pokémon League.
+      operationId: region_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegionList'
+          description: ''
+  /stat/{id_or_name}/:
+    get:
+      description: >-
+        Stats are attributes of Pokémon that influence battle performance.
+      operationId: stat_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stat'
+          description: ''
+  /stat/:
+    get:
+      description: >-
+        Stats are attributes of Pokémon that influence battle performance.
+      operationId: stat_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatList'
+          description: ''
+  /super-contest-effect/{id}/:
+    get:
+      description: >-
+        Super Contest Effects describe effects in Super Contests.
+      operationId: super_contest_effect_read
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuperContestEffect'
+          description: ''
+  /super-contest-effect/:
+    get:
+      description: >-
+        Super Contest Effects describe effects in Super Contests.
+      operationId: super_contest_effect_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuperContestEffectList'
+          description: ''
+  /type/{id_or_name}/:
+    get:
+      description: >-
+        Types define the type of Pokémon and moves.
+      operationId: type_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Type'
+          description: ''
+  /type/:
+    get:
+      description: >-
+        Types define the type of Pokémon and moves.
+      operationId: type_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TypeList'
+          description: ''
+  /utility-move/{id_or_name}/:
+    get:
+      description: >-
+        Utility Moves are moves with utility effects in battle.
+      operationId: utility_move_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UtilityMove'
+          description: ''
+  /utility-move/:
+    get:
+      description: >-
+        Utility Moves are moves with utility effects in battle.
+      operationId: utility_move_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UtilityMoveList'
+          description: ''
+  /version-group/{id_or_name}/:
+    get:
+      description: >-
+        Version Groups group Pokémon games by version.
+      operationId: version_group_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VersionGroup'
+          description: ''
+  /version-group/:
+    get:
+      description: >-
+        Version Groups group Pokémon games by version.
+      operationId: version_group_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VersionGroupList'
+          description: ''
+  /version/{id_or_name}/:
+    get:
+      description: >-
+        Versions are individual Pokémon games.
+      operationId: version_read
+      parameters:
+      - name: id_or_name
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Version'
+          description: ''
+  /version/:
+    get:
+      description: >-
+        Versions are individual Pokémon games.
+      operationId: version_list
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 0
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VersionList'
+          description: ''
+components:
+  schemas:
+    Ability:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        is_main_series:
+          type: boolean
+        generation:
+          $ref: '#/components/schemas/GenerationSummary'
+        effect_entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/AbilityEffectEntry'
+        effect_chance:
+          type: integer
+          format: int32
+        color:
+          $ref: '#/components/schemas/PokemonColorSummary'
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/AbilityName'
+        pokemon:
+          type: array
+          items:
+            $ref: '#/components/schemas/PokemonAbility'
+      required:
+      - id
+      - name
+      - is_main_series
+      - generation
+      - effect_entries
+      - effect_chance
+      - color
+      - names
+      - pokemon
+    AbilityEffectEntry:
+      type: object
+      properties:
+        effect:
+          type: string
+        short_effect:
+          type: string
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - effect
+      - short_effect
+      - language
+    AbilityList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    AbilityName:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - name
+      - language
+    AbilitySummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    Berry:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        growth_time:
+          type: integer
+          format: int32
+        max_harvest:
+          type: integer
+          format: int32
+        natural_gift_power:
+          type: integer
+          format: int32
+        size:
+          type: integer
+          format: int32
+        smoothness:
+          type: integer
+          format: int32
+        soil_dryness:
+          type: integer
+          format: int32
+        pH:
+          type: integer
+          format: int32
+        firmness:
+          $ref: '#/components/schemas/BerryFirmnessSummary'
+        flavors:
+          type: array
+          items:
+            $ref: '#/components/schemas/BerryFlavorMapEntry'
+        item:
+          $ref: '#/components/schemas/ItemSummary'
+        natural_gift_type:
+          $ref: '#/components/schemas/TypeSummary'
+        name:
+          type: string
+          maxLength: 200
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - id
+      - name
+      - growth_time
+      - max_harvest
+      - natural_gift_power
+      - size
+      - smoothness
+      - soil_dryness
+      - pH
+      - firmness
+      - flavors
+      - item
+      - natural_gift_type
+      - name
+      - language
+    BerryFirmness:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        berries:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/UtilityName'
+      required:
+      - id
+      - name
+      - berries
+      - names
+    BerryFirmnessList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    BerryFirmnessSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    BerryFlavor:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        berries:
+          type: array
+          items:
+            $ref: '#/components/schemas/BerryFlavorMapEntry'
+        contest_states:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContestState'
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/BerryFlavorName'
+      required:
+      - id
+      - name
+      - berries
+      - contest_states
+      - names
+    BerryFlavorList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    BerryFlavorMapEntry:
+      type: object
+      properties:
+        potency:
+          type: integer
+          format: int32
+        berry:
+          $ref: '#/components/schemas/BerrySummary'
+      required:
+      - potency
+      - berry
+    BerryFlavorName:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - name
+      - language
+    BerryFlavorSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    BerryList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    BerrySummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    Characteristic:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        gene_modulo:
+          type: integer
+          format: int32
+        possible_values:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacteristicValue'
+        descriptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacteristicDescription'
+      required:
+      - id
+      - gene_modulo
+      - possible_values
+      - descriptions
+    CharacteristicDescription:
+      type: object
+      properties:
+        description:
+          type: string
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - description
+      - language
+    CharacteristicList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    CharacteristicValue:
+      type: object
+      properties:
+        max:
+          type: integer
+          format: int32
+        minimum:
+          type: integer
+          format: int32
+      required:
+      - max
+      - minimum
+    CharacteristicSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    ContestComboDetail:
+      type: object
+      properties:
+        combo_starter:
+          type: boolean
+        normal:
+          $ref: '#/components/schemas/ContestComboMoves'
+        super:
+          $ref: '#/components/schemas/ContestComboMoves'
+      required:
+      - combo_starter
+      - normal
+      - super
+    ContestComboMoves:
+      type: object
+      properties:
+        preceding_moves:
+          type: array
+          items:
+            $ref: '#/components/schemas/MoveSummary'
+        target_moves:
+          type: array
+          items:
+            $ref: '#/components/schemas/MoveSummary'
+      required:
+      - preceding_moves
+      - target_moves
+    ContestComboString:
+      type: object
+      properties:
+        flavor_text:
+          type: string
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - flavor_text
+      - language
+    ContestEffect:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        appeal:
+          type: integer
+          format: int32
+        jam:
+          type: integer
+          format: int32
+        effect:
+          type: string
+        effect_string:
+          $ref: '#/components/schemas/ContestEffectString'
+        flavor_text_entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContestEffectFlavorText'
+        moves:
+          type: array
+          items:
+            $ref: '#/components/schemas/MoveSummary'
+      required:
+      - id
+      - appeal
+      - jam
+      - effect
+      - effect_string
+      - flavor_text_entries
+      - moves
+    ContestEffectFlavorText:
+      type: object
+      properties:
+        flavor_text:
+          type: string
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+        contest:
+          $ref: '#/components/schemas/ContestSummary'
+      required:
+      - flavor_text
+      - language
+      - contest
+    ContestEffectList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    ContestEffectString:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - name
+      - language
+    ContestState:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+      required:
+      - id
+      - name
+    ContestSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    ContestType:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        berry_flavor:
+          $ref: '#/components/schemas/BerryFlavorSummary'
+        contest_moves:
+          type: array
+          items:
+            $ref: '#/components/schemas/MoveSummary'
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContestName'
+      required:
+      - id
+      - name
+      - berry_flavor
+      - contest_moves
+      - names
+    ContestTypeList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    ContestTypeSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    EffectFlavorText:
+      type: object
+      properties:
+        flavor_text:
+          type: string
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+        version:
+          $ref: '#/components/schemas/VersionSummary'
+      required:
+      - flavor_text
+      - language
+      - version
+    EggGroup:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/EggGroupName'
+        pokemon_species:
+          type: array
+          items:
+            $ref: '#/components/schemas/PokemonSpeciesSummary'
+      required:
+      - id
+      - name
+      - names
+      - pokemon_species
+    EggGroupList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    EggGroupName:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - name
+      - language
+    EggGroupSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    EncounterArea:
+      type: object
+      properties:
+        location_area:
+          $ref: '#/components/schemas/LocationAreaSummary'
+        version_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/VersionEncounterDetail'
+      required:
+      - location_area
+      - version_details
+    EncounterCondition:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/EncounterConditionName'
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - id
+      - name
+      - names
+      - values
+    EncounterConditionList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    EncounterConditionSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    EncounterConditionValue:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/EncounterConditionValueName'
+        encounter_method:
+          $ref: '#/components/schemas/EncounterMethodSummary'
+      required:
+      - id
+      - name
+      - names
+      - encounter_method
+    EncounterConditionValueList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    EncounterConditionValueName:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - name
+      - language
+    EncounterConditionValueSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    EncounterMethod:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        order:
+          type: integer
+          format: int32
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/EncounterMethodName'
+      required:
+      - id
+      - name
+      - order
+      - names
+    EncounterMethodList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    EncounterMethodName:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - name
+      - language
+    EncounterMethodSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    EncounterSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    EvolutionChain:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        baby_trigger_item:
+          $ref: '#/components/schemas/ItemSummary'
+        chain:
+          $ref: '#/components/schemas/ChainLink'
+      required:
+      - id
+      - baby_trigger_item
+      - chain
+    EvolutionChainList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    EvolutionDetail:
+      type: object
+      properties:
+        item:
+          $ref: '#/components/schemas/ItemSummary'
+        party_species:
+          $ref: '#/components/schemas/PokemonSpeciesSummary'
+        party_type:
+          $ref: '#/components/schemas/TypeSummary'
+        held_item:
+          $ref: '#/components/schemas/ItemSummary'
+        held_item_version:
+          $ref: '#/components/schemas/ItemSummary'
+        trade_species:
+          $ref: '#/components/schemas/PokemonSpeciesSummary'
+        trade_from_species:
+          $ref: '#/components/schemas/PokemonSpeciesSummary'
+        minimum_level:
+          type: integer
+          format: int32
+        trigger:
+          $ref: '#/components/schemas/EvolutionTriggerSummary'
+        gender:
+          $ref: '#/components/schemas/GenderSummary'
+        location:
+          $ref: '#/components/schemas/LocationSummary'
+        knows_move:
+          $ref: '#/components/schemas/MoveSummary'
+        knows_move_type:
+          $ref: '#/components/schemas/TypeSummary'
+        minimum_happiness:
+          type: integer
+          format: int32
+        minimum_beauty:
+          type: integer
+          format: int32
+        needs_overworld_rain:
+          type: boolean
+        turn_cycles:
+          type: integer
+          format: int32
+        held_item_item:
+          $ref: '#/components/schemas/ItemSummary'
+        held_item_version_item:
+          $ref: '#/components/schemas/ItemSummary'
+        time_of_day:
+          type: string
+          maxLength: 200
+        relative_physical_stats:
+          type: integer
+          format: int32
+        party_level:
+          type: integer
+          format: int32
+        party_happiness:
+          type: integer
+          format: int32
+        needs_held_item:
+          type: boolean
+        trade_contract:
+          $ref: '#/components/schemas/PokemonSpeciesSummary'
+        motivation_level:
+          type: integer
+          format: int32
+      required:
+      - item
+      - party_species
+      - party_type
+      - held_item
+      - held_item_version
+      - trade_species
+      - trade_from_species
+      - minimum_level
+      - trigger
+      - gender
+      - location
+      - knows_move
+      - knows_move_type
+      - minimum_happiness
+      - minimum_beauty
+      - needs_overworld_rain
+      - turn_cycles
+      - held_item_item
+      - held_item_version_item
+      - time_of_day
+      - relative_physical_stats
+      - party_level
+      - party_happiness
+      - needs_held_item
+      - trade_contract
+      - motivation_level
+    EvolutionSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    EvolutionTrigger:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvolutionTriggerName'
+        pokemon_species:
+          type: array
+          items:
+            $ref: '#/components/schemas/PokemonSpeciesSummary'
+      required:
+      - id
+      - name
+      - names
+      - pokemon_species
+    EvolutionTriggerList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    EvolutionTriggerName:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - name
+      - language
+    EvolutionTriggerSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    FlavorBerryMap:
+      type: object
+      properties:
+        potency:
+          type: integer
+          format: int32
+        berry:
+          $ref: '#/components/schemas/BerrySummary'
+      required:
+      - potency
+      - berry
+    FlavorText:
+      type: object
+      properties:
+        species:
+          $ref: '#/components/schemas/PokemonSpeciesSummary'
+        flavor_text:
+          type: string
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+        version:
+          $ref: '#/components/schemas/VersionSummary'
+      required:
+      - species
+      - flavor_text
+      - language
+      - version
+    FlavorTextList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    FormCapabilities:
+      type: object
+      properties:
+        changed_abilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/AbilitySummary'
+        changed_stats:
+          type: array
+          items:
+            $ref: '#/components/schemas/StatSummary'
+        changed_types:
+          type: array
+          items:
+            $ref: '#/components/schemas/TypeSummary'
+      required:
+      - changed_abilities
+      - changed_stats
+      - changed_types
+    FormChange:
+      type: object
+      properties:
+        form:
+          $ref: '#/components/schemas/PokemonFormSummary'
+        trade_species:
+          $ref: '#/components/schemas/PokemonSpeciesSummary'
+        party_species:
+          $ref: '#/components/schemas/PokemonSpeciesSummary'
+        trade_from_species:
+          $ref: '#/components/schemas/PokemonSpeciesSummary'
+        trigger_item:
+          $ref: '#/components/schemas/ItemSummary'
+      required:
+      - form
+      - trade_species
+      - party_species
+      - trade_from_species
+      - trigger_item
+    FormChangeTrigger:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/Name'
+        forms:
+          type: array
+          items:
+            $ref: '#/components/schemas/PokemonFormSummary'
+      required:
+      - id
+      - name
+      - names
+      - forms
+    Gender:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        pokemon_species_count:
+          type: integer
+          format: int32
+        required_for_evolution:
+          type: array
+          items:
+            $ref: '#/components/schemas/PokemonSpeciesSummary'
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenderName'
+      required:
+      - id
+      - name
+      - pokemon_species_count
+      - required_for_evolution
+      - names
+    GenderList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    GenderName:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - name
+      - language
+    GenderSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    Generation:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        abilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/AbilitySummary'
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenerationFeature'
+        main_region:
+          $ref: '#/components/schemas/RegionSummary'
+        moves:
+          type: array
+          items:
+            $ref: '#/components/schemas/MoveSummary'
+        pokemon_species:
+          type: array
+          items:
+            $ref: '#/components/schemas/PokemonSpeciesSummary'
+        regions:
+          type: array
+          items:
+            $ref: '#/components/schemas/RegionSummary'
+        types:
+          type: array
+          items:
+            $ref: '#/components/schemas/TypeSummary'
+        version_groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/VersionGroupSummary'
+      required:
+      - id
+      - name
+      - abilities
+      - features
+      - main_region
+      - moves
+      - pokemon_species
+      - regions
+      - types
+      - version_groups
+    GenerationFeature:
+      type: object
+      properties:
+        creation_item:
+          $ref: '#/components/schemas/ItemSummary'
+        move_change_type:
+          $ref: '#/components/schemas/TypeSummary'
+        ability_name:
+          $ref: '#/components/schemas/AbilitySummary'
+        mechanic:
+          $ref: '#/components/schemas/MechanicSummary'
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/Name'
+      required:
+      - creation_item
+      - move_change_type
+      - ability_name
+      - mechanic
+      - names
+    GenerationList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    GenerationSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    GrowthRate:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        formula:
+          type: string
+        descriptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Description'
+        levels:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExperienceLevel'
+        pokemon_species:
+          type: array
+          items:
+            $ref: '#/components/schemas/PokemonSpeciesSummary'
+      required:
+      - id
+      - name
+      - formula
+      - descriptions
+      - levels
+      - pokemon_species
+    GrowthRateList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    GrowthRateSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    Item:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        category:
+          $ref: '#/components/schemas/ItemCategorySummary'
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemAttributeSummary'
+        effect_entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemEffectEntry'
+        fling_power:
+          type: integer
+          format: int32
+        fling_effect:
+          $ref: '#/components/schemas/ItemFlingEffectSummary'
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemName'
+        sprites:
+          $ref: '#/components/schemas/ItemSprites'
+        baby_trigger_for:
+          $ref: '#/components/schemas/EvolutionChainSummary'
+        held_by_pokemon:
+          type: array
+          items:
+            $ref: '#/components/schemas/PokemonItem'
+        machines:
+          type: array
+          items:
+            $ref: '#/components/schemas/MachineVersionStatus'
+        mega_stone:
+          $ref: '#/components/schemas/ItemMegaStoneSummary'
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/Name'
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - id
+      - name
+      - category
+      - attributes
+      - effect_entries
+      - fling_power
+      - fling_effect
+      - names
+      - sprites
+      - baby_trigger_for
+      - held_by_pokemon
+      - machines
+      - mega_stone
+      - names
+      - language
+    ItemAttribute:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+        descriptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemAttributeDescription'
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemAttributeName'
+      required:
+      - id
+      - name
+      - items
+      - descriptions
+      - names
+    ItemAttributeDescription:
+      type: object
+      properties:
+        description:
+          type: string
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - description
+      - language
+    ItemAttributeList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    ItemAttributeName:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - name
+      - language
+    ItemAttributeSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    ItemCategory:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemCategoryName'
+      required:
+      - id
+      - name
+      - items
+      - names
+    ItemCategoryList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    ItemCategoryName:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - name
+      - language
+    ItemCategorySummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    ItemEffectEntry:
+      type: object
+      properties:
+        effect:
+          type: string
+        short_effect:
+          type: string
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - effect
+      - short_effect
+      - language
+    ItemFlingEffect:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        effect:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - id
+      - name
+      - effect
+      - items
+    ItemFlingEffectList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    ItemFlingEffectSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    ItemList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    ItemMegaStone:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        pokemon:
+          $ref: '#/components/schemas/PokemonSpeciesSummary'
+      required:
+      - name
+      - pokemon
+    ItemMegaStoneList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    ItemMegaStoneSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    ItemName:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - name
+      - language
+    ItemPocket:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemPocketName'
+      required:
+      - id
+      - name
+      - categories
+      - names
+    ItemPocketList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    ItemPocketName:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - name
+      - language
+    ItemPocketSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    ItemSprites:
+      type: object
+      properties:
+        default:
+          type: string
+          format: uri
+      required:
+      - default
+    ItemSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    Language:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        official:
+          type: boolean
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/LanguageName'
+      required:
+      - id
+      - name
+      - official
+      - names
+    LanguageList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    LanguageName:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        local:
+          type: string
+          maxLength: 200
+        official:
+          type: string
+          maxLength: 200
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - name
+      - local
+      - official
+      - language
+    LanguageSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    LevelUpMove:
+      type: object
+      properties:
+        move_learn_template:
+          $ref: '#/components/schemas/MoveLearnTemplateSummary'
+        version_group:
+          $ref: '#/components/schemas/VersionGroupSummary'
+        level_learned_at:
+          type: integer
+          format: int32
+        move:
+          $ref: '#/components/schemas/MoveSummary'
+        version_learned_at:
+          $ref: '#/components/schemas/VersionSummary'
+        learn_method:
+          $ref: '#/components/schemas/MoveLearnMethodSummary'
+      required:
+      - move_learn_template
+      - version_group
+      - level_learned_at
+      - move
+      - version_learned_at
+      - learn_method
+    Location:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        region:
+          $ref: '#/components/schemas/RegionSummary'
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocationName'
+        game_indices:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenerationGameIndex'
+        areas:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocationAreaSummary'
+      required:
+      - id
+      - name
+      - region
+      - names
+      - game_indices
+      - areas
+    LocationArea:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        game_version:
+          $ref: '#/components/schemas/VersionSummary'
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocationAreaName'
+        location:
+          $ref: '#/components/schemas/LocationSummary'
+        pokemon_encounters:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocationAreaEncounter'
+      required:
+      - id
+      - name
+      - game_version
+      - names
+      - location
+      - pokemon_encounters
+    LocationAreaEncounter:
+      type: object
+      properties:
+        pokemon:
+          $ref: '#/components/schemas/PokemonEncounter'
+        version_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocationAreaEncounterVersion'
+      required:
+      - pokemon
+      - version_details
+    LocationAreaEncounterVersion:
+      type: object
+      properties:
+        max_chance:
+          type: integer
+          format: int32
+        encounter_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/Encounter'
+        version:
+          $ref: '#/components/schemas/VersionSummary'
+      required:
+      - max_chance
+      - encounter_details
+      - version
+    LocationAreaList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    LocationAreaName:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - name
+      - language
+    LocationAreaSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    LocationEncounter:
+      type: object
+      properties:
+        location_area:
+          $ref: '#/components/schemas/LocationAreaSummary'
+        pokemon:
+          $ref: '#/components/schemas/PokemonEncounter'
+        version_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/VersionEncounterDetail'
+      required:
+      - location_area
+      - pokemon
+      - version_details
+    LocationGamut:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        regions:
+          type: array
+          items:
+            $ref: '#/components/schemas/RegionSummary'
+        locations:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocationSummary'
+      required:
+      - id
+      - name
+      - regions
+      - locations
+    LocationGamutList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    LocationGamutSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    LocationList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    LocationName:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - name
+      - language
+    LocationSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    Machine:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        item:
+          $ref: '#/components/schemas/ItemSummary'
+        move:
+          $ref: '#/components/schemas/MoveSummary'
+        version_group:
+          $ref: '#/components/schemas/VersionGroupSummary'
+      required:
+      - id
+      - item
+      - move
+      - version_group
+    MachineList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    MachineVersionStatus:
+      type: object
+      properties:
+        machine:
+          $ref: '#/components/schemas/MachineSummary'
+        version_group:
+          $ref: '#/components/schemas/VersionGroupSummary'
+      required:
+      - machine
+      - version_group
+    MachineSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    MechanicSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    MegaEvolutionPair:
+      type: object
+      properties:
+        mega_evolution:
+          $ref: '#/components/schemas/PokemonSummary'
+        pre_evolution:
+          $ref: '#/components/schemas/PokemonSummary'
+      required:
+      - mega_evolution
+      - pre_evolution
+    Move:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        accuracy:
+          type: integer
+          format: int32
+        category:
+          $ref: '#/components/schemas/MoveCategorySummary'
+        priority:
+          type: integer
+          format: int32
+        pp:
+          type: integer
+          format: int32
+        power:
+          type: integer
+          format: int32
+        contest_combos:
+          $ref: '#/components/schemas/ContestComboDetail'
+        contest_effect:
+          $ref: '#/components/schemas/ContestEffectSummary'
+        contest_type:
+          $ref: '#/components/schemas/ContestTypeSummary'
+        contest_combo_starter:
+          type: boolean
+        damage_class:
+          $ref: '#/components/schemas/MoveDamageClassSummary'
+        effect_chance:
+          type: integer
+          format: int32
+        effect_changes:
+          type: array
+          items:
+            $ref: '#/components/schemas/MoveEffectChange'
+        effect_entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/MoveEffectEntry'
+        generation:
+          $ref: '#/components/schemas/GenerationSummary'
+        learned_by_pokemon:
+          type: array
+          items:
+            $ref: '#/components/schemas/PokemonSummary'
+        machines:
+          type: array
+          items:
+            $ref: '#/components/schemas/MachineSummary'
+        meta:
+          $ref: '#/components/schemas/MoveMetaData'
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/MoveName'
+        past_values:
+          type: array
+          items:
+            $ref: '#/components/schemas/PastMoveStatValues'
+        stat_changes:
+          type: array
+          items:
+            $ref: '#/components/schemas/MoveStatChange'
+        super_contest_effect:
+          $ref: '#/components/schemas/SuperContestEffectSummary'
+        target:
+          $ref: '#/components/schemas/MoveTargetSummary'
+        type:
+          $ref: '#/components/schemas/TypeSummary'
+        utility_moves:
+          type: array
+          items:
+            $ref: '#/components/schemas/UtilityMoveSummary'
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/Name'
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - id
+      - name
+      - accuracy
+      - category
+      - priority
+      - pp
+      - power
+      - contest_combos
+      - contest_effect
+      - contest_type
+      - contest_combo_starter
+      - damage_class
+      - effect_chance
+      - effect_changes
+      - effect_entries
+      - generation
+      - learned_by_pokemon
+      - machines
+      - meta
+      - names
+      - past_values
+      - stat_changes
+      - super_contest_effect
+      - target
+      - type
+      - utility_moves
+      - names
+      - language
+    MoveAilment:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/MoveAilmentName'
+        moves:
+          type: array
+          items:
+            $ref: '#/components/schemas/MoveSummary'
+      required:
+      - id
+      - name
+      - names
+      - moves
+    MoveAilmentList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    MoveAilmentName:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - name
+      - language
+    MoveAilmentSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    MoveBattleStyle:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/MoveBattleStyleName'
+        pokemon:
+          type: array
+          items:
+            $ref: '#/components/schemas/PokemonSummary'
+      required:
+      - id
+      - name
+      - names
+      - pokemon
+    MoveBattleStyleList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    MoveBattleStyleName:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - name
+      - language
+    MoveBattleStyleSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    MoveCategory:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/MoveCategoryName'
+        moves:
+          type: array
+          items:
+            $ref: '#/components/schemas/MoveSummary'
+      required:
+      - id
+      - name
+      - names
+      - moves
+    MoveCategoryList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    MoveCategoryName:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - name
+      - language
+    MoveCategorySummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    MoveDamageClass:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        description:
+          $ref: '#/components/schemas/Description'
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/Name'
+        moves:
+          type: array
+          items:
+            $ref: '#/components/schemas/MoveSummary'
+      required:
+      - id
+      - name
+      - description
+      - names
+      - moves
+    MoveDamageClassList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    MoveDamageClassSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    MoveEffectChange:
+      type: object
+      properties:
+        version_group:
+          $ref: '#/components/schemas/VersionGroupSummary'
+        effect_entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/MoveEffectEntry'
+      required:
+      - version_group
+      - effect_entries
+    MoveEffectChangeSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    MoveEffectEntry:
+      type: object
+      properties:
+        effect:
+          type: string
+        short_effect:
+          type: string
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - effect
+      - short_effect
+      - language
+    MoveFlag:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/UtilityName'
+        move:
+          type: array
+          items:
+            $ref: '#/components/schemas/MoveSummary'
+      required:
+      - id
+      - name
+      - names
+      - move
+    MoveFlagSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    MoveLearnMethod:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        descriptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Description'
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/Name'
+        version_groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/VersionGroupSummary'
+      required:
+      - id
+      - name
+      - descriptions
+      - names
+      - version_groups
+    MoveLearnMethodList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    MoveLearnMethodSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    MoveLearnTemplateSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    MoveList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    MoveMetaData:
+      type: object
+      properties:
+        ailment:
+          $ref: '#/components/schemas/MoveAilmentSummary'
+        category:
+          $ref: '#/components/schemas/MoveCategorySummary'
+        crit_rate:
+          type: integer
+          format: int32
+        drain:
+          type: integer
+          format: int32
+        flinch_chance:
+          type: integer
+          format: int32
+        healing:
+          type: integer
+          format: int32
+        crit_hit:
+          type: integer
+          format: int32
+        ailment_chance:
+          type: integer
+          format: int32
+        min_hits:
+          type: integer
+          format: int32
+        max_hits:
+          type: integer
+          format: int32
+        min_turns:
+          type: integer
+          format: int32
+        max_turns:
+          type: integer
+          format: int32
+        stat_chance:
+          type: integer
+          format: int32
+      required:
+      - ailment
+      - category
+      - crit_rate
+      - drain
+      - flinch_chance
+      - healing
+      - crit_hit
+      - ailment_chance
+      - min_hits
+      - max_hits
+      - min_turns
+      - max_turns
+      - stat_chance
+    MoveName:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - name
+      - language
+    MoveStatChange:
+      type: object
+      properties:
+        change:
+          type: integer
+          format: int32
+        stat:
+          $ref: '#/components/schemas/StatSummary'
+      required:
+      - change
+      - stat
+    MoveSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    MoveTarget:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        descriptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Description'
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/Name'
+        moves:
+          type: array
+          items:
+            $ref: '#/components/schemas/MoveSummary'
+      required:
+      - id
+      - name
+      - descriptions
+      - names
+      - moves
+    MoveTargetList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    MoveTargetSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    Name:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - name
+      - language
+    NamedAPIResource:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    NamedAPIResourceList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    Nature:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        decreased_stat:
+          $ref: '#/components/schemas/StatSummary'
+        increased_stat:
+          $ref: '#/components/schemas/StatSummary'
+        hates_flavor:
+          $ref: '#/components/schemas/BerryFlavorSummary'
+        likes_flavor:
+          $ref: '#/components/schemas/BerryFlavorSummary'
+        pokeathlon_stat_changes:
+          type: array
+          items:
+            $ref: '#/components/schemas/NaturePokeathlonStatAffect'
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/NatureName'
+        move_battle_style_preferences:
+          type: array
+          items:
+            $ref: '#/components/schemas/NatureMoveBattleStylePreference'
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/Name'
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - id
+      - name
+      - decreased_stat
+      - increased_stat
+      - hates_flavor
+      - likes_flavor
+      - pokeathlon_stat_changes
+      - names
+      - move_battle_style_preferences
+      - names
+      - language
+    NatureList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    NatureMoveBattleStylePreference:
+      type: object
+      properties:
+        max_change:
+          type: integer
+          format: int32
+        move_battle_style:
+          $ref: '#/components/schemas/MoveBattleStyleSummary'
+      required:
+      - max_change
+      - move_battle_style
+    NatureName:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - name
+      - language
+    NaturePokeathlonStatAffect:
+      type: object
+      properties:
+        max_change:
+          type: integer
+          format: int32
+        pokeathlon_stat:
+          $ref: '#/components/schemas/PokeathlonStatSummary'
+      required:
+      - max_change
+      - pokeathlon_stat
+    NaturePokeathlonStatAffectSets:
+      type: object
+      properties:
+        decreased_stats:
+          type: array
+          items:
+            $ref: '#/components/schemas/NaturePokeathlonStatAffect'
+        increased_stats:
+          type: array
+          items:
+            $ref: '#/components/schemas/NaturePokeathlonStatAffect'
+      required:
+      - decreased_stats
+      - increased_stats
+    NatureSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    PalParkArea:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/PalParkAreaName'
+        pokemon_encounters:
+          type: array
+          items:
+            $ref: '#/components/schemas/PalParkEncounterSpecies'
+      required:
+      - id
+      - name
+      - names
+      - pokemon_encounters
+    PalParkAreaList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    PalParkAreaName:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - name
+      - language
+    PalParkAreaSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    PalParkEncounterSpecies:
+      type: object
+      properties:
+        base_score:
+          type: integer
+          format: int32
+        rate:
+          type: integer
+          format: int32
+        pokemon_species:
+          $ref: '#/components/schemas/PokemonSpeciesSummary'
+      required:
+      - base_score
+      - rate
+      - pokemon_species
+    PastMoveStatValues:
+      type: object
+      properties:
+        version_group:
+          $ref: '#/components/schemas/VersionGroupSummary'
+        accuracy:
+          type: integer
+          format: int32
+        effect_chance:
+          type: integer
+          format: int32
+        power:
+          type: integer
+          format: int32
+        pp:
+          type: integer
+          format: int32
+        effect_entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/MoveEffectEntry'
+        stat_changes:
+          type: array
+          items:
+            $ref: '#/components/schemas/MoveStatChange'
+      required:
+      - version_group
+      - accuracy
+      - effect_chance
+      - power
+      - pp
+      - effect_entries
+      - stat_changes
+    PersonalComputer:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    PokeathlonStat:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        affecting_natures:
+          $ref: '#/components/schemas/NaturePokeathlonStatAffectSets'
+        descriptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PokeathlonStatDescription'
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/PokeathlonStatName'
+        pokemon:
+          type: array
+          items:
+            $ref: '#/components/schemas/PokemonSpeciesSummary'
+      required:
+      - id
+      - name
+      - affecting_natures
+      - descriptions
+      - names
+      - pokemon
+    PokeathlonStatDescription:
+      type: object
+      properties:
+        description:
+          type: string
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - description
+      - language
+    PokeathlonStatList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    PokeathlonStatName:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - name
+      - language
+    PokeathlonStatSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    PokemonAbility:
+      type: object
+      properties:
+        is_hidden:
+          type: boolean
+        slot:
+          type: integer
+          format: int32
+        ability:
+          $ref: '#/components/schemas/AbilitySummary'
+      required:
+      - is_hidden
+      - slot
+      - ability
+    PokemonColor:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/PokemonColorName'
+        pokemon_species:
+          type: array
+          items:
+            $ref: '#/components/schemas/PokemonSpeciesSummary'
+      required:
+      - id
+      - name
+      - names
+      - pokemon_species
+    PokemonColorList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    PokemonColorName:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - name
+      - language
+    PokemonColorSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    PokemonEncounter:
+      type: object
+      properties:
+        pokemon:
+          $ref: '#/components/schemas/PokemonSummary'
+        version_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/VersionEncounterDetail'
+        is_mega_evolution:
+          type: boolean
+      required:
+      - pokemon
+      - version_details
+      - is_mega_evolution
+    PokemonForm:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        types:
+          type: array
+          items:
+            $ref: '#/components/schemas/TypeSlot'
+        form_order:
+          type: integer
+          format: int32
+        form_description:
+          $ref: '#/components/schemas/FormDescription'
+        form_capabilities:
+          $ref: '#/components/schemas/FormCapabilities'
+        form_change:
+          $ref: '#/components/schemas/FormChange'
+        form_change_trigger:
+          $ref: '#/components/schemas/FormChangeTriggerSummary'
+        is_battle_only:
+          type: boolean
+        is_default:
+          type: boolean
+        is_mega_evolution:
+          type: boolean
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/PokemonFormName'
+        pokemon:
+          $ref: '#/components/schemas/PokemonSummary'
+        sprites:
+          $ref: '#/components/schemas/PokemonFormSprites'
+        version_group:
+          $ref: '#/components/schemas/VersionGroupSummary'
+      required:
+      - id
+      - name
+      - types
+      - form_order
+      - form_description
+      - form_capabilities
+      - form_change
+      - form_change_trigger
+      - is_battle_only
+      - is_default
+      - is_mega_evolution
+      - names
+      - pokemon
+      - sprites
+      - version_group
+    PokemonFormCapabilities:
+      type: object
+      properties:
+        changed_abilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/AbilitySummary'
+        changed_stats:
+          type: array
+          items:
+            $ref: '#/components/schemas/StatSummary'
+        changed_types:
+          type: array
+          items:
+            $ref: '#/components/schemas/TypeSummary'
+      required:
+      - changed_abilities
+      - changed_stats
+      - changed_types
+    PokemonFormDescription:
+      type: object
+      properties:
+        description:
+          type: string
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - description
+      - language
+    PokemonFormList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    PokemonFormName:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - name
+      - language
+    PokemonFormSprites:
+      type: object
+      properties:
+        front_default:
+          type: string
+          format: uri
+        front_normal:
+          type: string
+          format: uri
+        front_shiny:
+          type: string
+          format: uri
+        back_default:
+          type: string
+          format: uri
+        back_normal:
+          type: string
+          format: uri
+        back_shiny:
+          type: string
+          format: uri
+      required:
+      - front_default
+      - front_normal
+      - front_shiny
+      - back_default
+      - back_normal
+      - back_shiny
+    PokemonFormSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    PokemonHabitat:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/PokemonHabitatName'
+        pokemon_species:
+          type: array
+          items:
+            $ref: '#/components/schemas/PokemonSpeciesSummary'
+      required:
+      - id
+      - name
+      - names
+      - pokemon_species
+    PokemonHabitatList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    PokemonHabitatName:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - name
+      - language
+    PokemonHabitatSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    PokemonHeldItem:
+      type: object
+      properties:
+        item:
+          $ref: '#/components/schemas/ItemSummary'
+        version_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/PokemonHeldItemVersion'
+      required:
+      - item
+      - version_details
+    PokemonHeldItemVersion:
+      type: object
+      properties:
+        version:
+          $ref: '#/components/schemas/VersionSummary'
+        rarity:
+          type: integer
+          format: int32
+      required:
+      - version
+      - rarity
+    PokemonItem:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        version_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/PokemonItemVersion'
+        item:
+          $ref: '#/components/schemas/ItemSummary'
+      required:
+      - name
+      - version_details
+      - item
+    PokemonItemVersion:
+      type: object
+      properties:
+        version:
+          $ref: '#/components/schemas/VersionSummary'
+        rarity:
+          type: integer
+          format: int32
+      required:
+      - version
+      - rarity
+    PokemonList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    PokemonMove:
+      type: object
+      properties:
+        move:
+          $ref: '#/components/schemas/MoveSummary'
+        version_group_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/LevelUpMoveDetail'
+      required:
+      - move
+      - version_group_details
+    PokemonMoveSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    PokemonShape:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        awesome_names:
+          type: array
+          items:
+            $ref: '#/components/schemas/AwesomeName'
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/PokemonShapeName'
+        pokemon_species:
+          type: array
+          items:
+            $ref: '#/components/schemas/PokemonSpeciesSummary'
+      required:
+      - id
+      - name
+      - awesome_names
+      - names
+      - pokemon_species
+    PokemonShapeGroup:
+      type: object
+      properties:
+        awesome_name:
+          $ref: '#/components/schemas/AwesomeName'
+        pokemon_species:
+          type: array
+          items:
+            $ref: '#/components/schemas/PokemonSpeciesSummary'
+      required:
+      - awesome_name
+      - pokemon_species
+    PokemonShapeList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    PokemonShapeName:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - name
+      - language
+    PokemonShapeSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    PokemonSpecies:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        order:
+          type: integer
+          format: int32
+        gender_rate:
+          type: integer
+          format: int32
+        capture_rate:
+          type: integer
+          format: int32
+        base_happiness:
+          type: integer
+          format: int32
+        is_baby:
+          type: boolean
+        is_legendary:
+          type: boolean
+        is_mythical:
+          type: boolean
+        hatches_egg:
+          type: boolean
+        egg_groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/EggGroupSummary'
+        color:
+          $ref: '#/components/schemas/PokemonColorSummary'
+        shape:
+          $ref: '#/components/schemas/PokemonShapeSummary'
+        evolves_from_species:
+          $ref: '#/components/schemas/PokemonSpeciesSummary'
+        evolution_chain:
+          $ref: '#/components/schemas/EvolutionChainSummary'
+        habitat:
+          $ref: '#/components/schemas/PokemonHabitatSummary'
+        generation:
+          $ref: '#/components/schemas/GenerationSummary'
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/PokemonSpeciesName'
+        flavor_text_entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/FlavorText'
+        form_descriptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/FormDescription'
+        forms:
+          type: array
+          items:
+            $ref: '#/components/schemas/PokemonFormSummary'
+        varieties:
+          type: array
+          items:
+            $ref: '#/components/schemas/PokemonSpeciesVariety'
+        mega_evolutions:
+          type: array
+          items:
+            $ref: '#/components/schemas/MegaEvolutionPair'
+        pal_park_habitats:
+          type: array
+          items:
+            $ref: '#/components/schemas/PalParkHabitat'
+        forms_switchable:
+          type: boolean
+        is_order_alternate_form:
+          type: boolean
+        form_hide:
+          type: boolean
+        is_default:
+          type: boolean
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/Name'
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - id
+      - name
+      - order
+      - gender_rate
+      - capture_rate
+      - base_happiness
+      - is_baby
+      - is_legendary
+      - is_mythical
+      - hatches_egg
+      - egg_groups
+      - color
+      - shape
+      - evolves_from_species
+      - evolution_chain
+      - habitat
+      - generation
+      - names
+      - flavor_text_entries
+      - form_descriptions
+      - forms
+      - varieties
+      - mega_evolutions
+      - pal_park_habitats
+      - forms_switchable
+      - is_order_alternate_form
+      - form_hide
+      - is_default
+      - names
+      - language
+    PokemonSpeciesGender:
+      type: object
+      properties:
+        rate:
+          type: integer
+          format: int32
+        pokemon_species:
+          $ref: '#/components/schemas/PokemonSpeciesSummary'
+      required:
+      - rate
+      - pokemon_species
+    PokemonSpeciesList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    PokemonSpeciesSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    PokemonSpeciesVariety:
+      type: object
+      properties:
+        is_default:
+          type: boolean
+        pokemon:
+          $ref: '#/components/schemas/PokemonSummary'
+      required:
+      - is_default
+      - pokemon
+    PokemonSprite:
+      type: object
+      properties:
+        front_default:
+          type: string
+          format: uri
+        front_female:
+          type: string
+          format: uri
+        front_shiny:
+          type: string
+          format: uri
+        front_shiny_female:
+          type: string
+          format: uri
+        back_default:
+          type: string
+          format: uri
+        back_female:
+          type: string
+          format: uri
+        back_shiny:
+          type: string
+          format: uri
+        back_shiny_female:
+          type: string
+          format: uri
+        versions:
+          $ref: '#/components/schemas/PokemonSpriteVersions'
+        types:
+          type: array
+          items:
+            $ref: '#/components/schemas/TypeSlot'
+        order:
+          type: integer
+          format: int32
+        is_default:
+          type: boolean
+      required:
+      - front_default
+      - front_female
+      - front_shiny
+      - front_shiny_female
+      - back_default
+      - back_female
+      - back_shiny
+      - back_shiny_female
+      - versions
+      - types
+      - order
+      - is_default
+    PokemonSpriteVersions:
+      type: object
+      properties:
+        'generation-i':
+          $ref: '#/components/schemas/PokemonSpriteGenerationI'
+        'generation-ii':
+          $ref: '#/components/schemas/PokemonSpriteGenerationIi'
+        'generation-iii':
+          $ref: '#/components/schemas/PokemonSpriteGenerationIii'
+        'generation-iv':
+          $ref: '#/components/schemas/PokemonSpriteGenerationIv'
+        'generation-v':
+          $ref: '#/components/schemas/PokemonSpriteGenerationV'
+        'generation-vi':
+          $ref: '#/components/schemas/PokemonSpriteGenerationVi'
+        'generation-vii':
+          $ref: '#/components/schemas/PokemonSpriteGenerationVii'
+        'generation-viii':
+          $ref: '#/components/schemas/PokemonSpriteGenerationViii'
+      required:
+      - 'generation-i'
+      - 'generation-ii'
+      - 'generation-iii'
+      - 'generation-iv'
+      - 'generation-v'
+      - 'generation-vi'
+      - 'generation-vii'
+      - 'generation-viii'
+    PokemonSpriteVersion:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    PokemonStat:
+      type: object
+      properties:
+        stat:
+          $ref: '#/components/schemas/StatSummary'
+        base_stat:
+          type: integer
+          format: int32
+        effort:
+          type: integer
+          format: int32
+      required:
+      - stat
+      - base_stat
+      - effort
+    PokemonSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    PokemonType:
+      type: object
+      properties:
+        slot:
+          type: integer
+          format: int32
+        type:
+          $ref: '#/components/schemas/TypeSummary'
+      required:
+      - slot
+      - type
+    Region:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/RegionName'
+        locations:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocationSummary'
+        main_generation:
+          $ref: '#/components/schemas/GenerationSummary'
+        pokedexes:
+          type: array
+          items:
+            $ref: '#/components/schemas/PokedexSummary'
+        version_groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/VersionGroupSummary'
+      required:
+      - id
+      - name
+      - names
+      - locations
+      - main_generation
+      - pokedexes
+      - version_groups
+    RegionList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    RegionName:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - name
+      - language
+    RegionSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    Stat:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        is_battle_only:
+          type: boolean
+        game_index:
+          type: integer
+          format: int32
+        affecting_moves:
+          type: array
+          items:
+            $ref: '#/components/schemas/MoveStatAffect'
+        damage_class:
+          $ref: '#/components/schemas/MoveDamageClassSummary'
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/StatName'
+        affecting_natures:
+          $ref: '#/components/schemas/NatureStatAffectSets'
+        characteristics:
+          $ref: '#/components/schemas/CharacteristicSummary'
+        move_damage_class:
+          $ref: '#/components/schemas/MoveDamageClassSummary'
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/Name'
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - id
+      - name
+      - is_battle_only
+      - game_index
+      - affecting_moves
+      - damage_class
+      - names
+      - affecting_natures
+      - characteristics
+      - move_damage_class
+      - names
+      - language
+    StatList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    StatName:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - name
+      - language
+    StatSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    SuperContestEffect:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        appeal:
+          type: integer
+          format: int32
+        flavor_text_entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/SuperContestEffectFlavorText'
+        moves:
+          type: array
+          items:
+            $ref: '#/components/schemas/MoveSummary'
+      required:
+      - id
+      - appeal
+      - flavor_text_entries
+      - moves
+    SuperContestEffectFlavorText:
+      type: object
+      properties:
+        flavor_text:
+          type: string
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - flavor_text
+      - language
+    SuperContestEffectList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    SuperContestEffectSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    Type:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        damage_relations:
+          $ref: '#/components/schemas/TypeRelations'
+        past_damage_relations:
+          type: array
+          items:
+            $ref: '#/components/schemas/TypeRelationsPast'
+        generation:
+          $ref: '#/components/schemas/GenerationSummary'
+        move_damage_class:
+          $ref: '#/components/schemas/MoveDamageClassSummary'
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/TypeName'
+        pokemon:
+          type: array
+          items:
+            $ref: '#/components/schemas/TypePokemon'
+        moves:
+          type: array
+          items:
+            $ref: '#/components/schemas/TypeMove'
+      required:
+      - id
+      - name
+      - damage_relations
+      - past_damage_relations
+      - generation
+      - move_damage_class
+      - names
+      - pokemon
+      - moves
+    TypeDamageFight:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    TypeList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    TypeMove:
+      type: object
+      properties:
+        move:
+          $ref: '#/components/schemas/MoveSummary'
+        learn_methods:
+          type: array
+          items:
+            $ref: '#/components/schemas/MoveLearnMethodSummary'
+      required:
+      - move
+      - learn_methods
+    TypeName:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - name
+      - language
+    TypePokemon:
+      type: object
+      properties:
+        slot:
+          type: integer
+          format: int32
+        pokemon:
+          $ref: '#/components/schemas/PokemonSummary'
+        is_mega_evolution:
+          type: boolean
+      required:
+      - slot
+      - pokemon
+      - is_mega_evolution
+    TypePocket:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    TypeRelations:
+      type: object
+      properties:
+        no_damage_to:
+          type: array
+          items:
+            $ref: '#/components/schemas/TypeSummary'
+        half_damage_to:
+          type: array
+          items:
+            $ref: '#/components/schemas/TypeSummary'
+        double_damage_to:
+          type: array
+          items:
+            $ref: '#/components/schemas/TypeSummary'
+        no_damage_from:
+          type: array
+          items:
+            $ref: '#/components/schemas/TypeSummary'
+        half_damage_from:
+          type: array
+          items:
+            $ref: '#/components/schemas/TypeSummary'
+        double_damage_from:
+          type: array
+          items:
+            $ref: '#/components/schemas/TypeSummary'
+      required:
+      - no_damage_to
+      - half_damage_to
+      - double_damage_to
+      - no_damage_from
+      - half_damage_from
+      - double_damage_from
+    TypeRelationsPast:
+      type: object
+      properties:
+        generation:
+          $ref: '#/components/schemas/GenerationSummary'
+        damage_relations:
+          $ref: '#/components/schemas/TypeRelations'
+      required:
+      - generation
+      - damage_relations
+    TypeSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    UtilityMove:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        effect:
+          type: string
+        pokemon:
+          type: array
+          items:
+            $ref: '#/components/schemas/PokemonSummary'
+      required:
+      - id
+      - name
+      - effect
+      - pokemon
+    UtilityMoveList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    UtilityMoveSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    UtilityName:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - name
+      - language
+    Version:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/VersionName'
+      required:
+      - id
+      - name
+      - names
+    VersionEncounterDetail:
+      type: object
+      properties:
+        version:
+          $ref: '#/components/schemas/VersionSummary'
+        max_chance:
+          type: integer
+          format: int32
+        encounter_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/Encounter'
+      required:
+      - version
+      - max_chance
+      - encounter_details
+    VersionEncounterDetailWithArea:
+      type: object
+      properties:
+        version:
+          $ref: '#/components/schemas/VersionSummary'
+        max_chance:
+          type: integer
+          format: int32
+        encounter_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/Encounter'
+        location_area:
+          $ref: '#/components/schemas/LocationAreaSummary'
+      required:
+      - version
+      - max_chance
+      - encounter_details
+      - location_area
+    VersionGameIndex:
+      type: object
+      properties:
+        game_index:
+          type: integer
+          format: int32
+        version:
+          $ref: '#/components/schemas/VersionSummary'
+      required:
+      - game_index
+      - version
+    VersionGroup:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        order:
+          type: integer
+          format: int32
+        generation:
+          $ref: '#/components/schemas/GenerationSummary'
+        move_learn_methods:
+          type: array
+          items:
+            $ref: '#/components/schemas/MoveLearnMethodSummary'
+        pokedexes:
+          type: array
+          items:
+            $ref: '#/components/schemas/PokedexSummary'
+        regions:
+          type: array
+          items:
+            $ref: '#/components/schemas/RegionSummary'
+        versions:
+          type: array
+          items:
+            $ref: '#/components/schemas/VersionSummary'
+      required:
+      - id
+      - name
+      - order
+      - generation
+      - move_learn_methods
+      - pokedexes
+      - regions
+      - versions
+    VersionGroupList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    VersionGroupSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
+    VersionList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          readOnly: true
+        next:
+          type: string
+          format: uri
+          readOnly: true
+        previous:
+          type: string
+          format: uri
+          readOnly: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedAPIResource'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    VersionName:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        language:
+          $ref: '#/components/schemas/LanguageSummary'
+      required:
+      - name
+      - language
+    VersionSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - name
+      - url
