@@ -189,7 +189,12 @@ class ValidationEngine:
             )
             
             if response_schema:
-                schema_result = self.validators['schema'].validate(response, response_schema)
+                # Pass the full spec for reference resolution
+                schema_result = self.validators['schema'].validate(
+                    response, 
+                    response_schema,
+                    spec=self.parser.spec 
+                )
                 validations['schema'] = schema_result.to_dict()
         
         # Header validation

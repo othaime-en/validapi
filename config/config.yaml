@@ -1,12 +1,14 @@
 # API Validator Configuration
 
 validation:
-  strict_mode: true # Fail on any validation error
+  strict_mode: false # Set to false to be more lenient with nullable fields
   timeout: 30 # Request timeout in seconds
   max_retries: 3 # Maximum retry attempts
   validate_examples: true # Validate example responses in spec
   validate_headers: true # Validate response headers
   validate_status_codes: true # Validate expected status codes
+  allow_null_for_optional: true # Allow null values for optional fields
+  ignore_readonly_nulls: true # Ignore null values in readOnly fields
 
 reporting:
   output_format: "html" # html, json, xml, console
@@ -28,5 +30,5 @@ http:
 execution:
   parallel_requests: false
   max_workers: 4
-  delay_between_requests: 0 # seconds
+  delay_between_requests: 0.1 # Add small delay to avoid rate limiting
   stop_on_first_failure: false
