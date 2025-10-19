@@ -18,4 +18,4 @@ jobs:
 
       - name: Validate API
         run: |
-          python src/main.py validate specs/api.yaml --output-format json
+          python src/main.py validate specs/pokeapi_spec.yaml --output-format json
