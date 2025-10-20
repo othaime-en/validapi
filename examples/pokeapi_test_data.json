@@ -1,0 +1,729 @@
+{
+  "/api/v2/ability/": {
+    "get": {
+      "params": {
+        "limit": 20,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/ability/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "battle-armor"
+      }
+    }
+  },
+  "/api/v2/berry/": {
+    "get": {
+      "params": {
+        "limit": 20,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/berry/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "cheri"
+      }
+    }
+  },
+  "/api/v2/berry-firmness/": {
+    "get": {
+      "params": {
+        "limit": 10,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/berry-firmness/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "very-soft"
+      }
+    }
+  },
+  "/api/v2/berry-flavor/": {
+    "get": {
+      "params": {
+        "limit": 10,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/berry-flavor/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "spicy"
+      }
+    }
+  },
+  "/api/v2/characteristic/": {
+    "get": {
+      "params": {
+        "limit": 20,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/characteristic/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "1"
+      }
+    }
+  },
+  "/api/v2/contest-type/": {
+    "get": {
+      "params": {
+        "limit": 10,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/contest-type/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "cool"
+      }
+    }
+  },
+  "/api/v2/contest-effect/": {
+    "get": {
+      "params": {
+        "limit": 20,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/contest-effect/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "1"
+      }
+    }
+  },
+  "/api/v2/egg-group/": {
+    "get": {
+      "params": {
+        "limit": 20,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/egg-group/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "monster"
+      }
+    }
+  },
+  "/api/v2/encounter-method/": {
+    "get": {
+      "params": {
+        "limit": 20,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/encounter-method/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "walk"
+      }
+    }
+  },
+  "/api/v2/encounter-condition/": {
+    "get": {
+      "params": {
+        "limit": 20,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/encounter-condition/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "swarm"
+      }
+    }
+  },
+  "/api/v2/encounter-condition-value/": {
+    "get": {
+      "params": {
+        "limit": 20,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/encounter-condition-value/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "swarm-yes"
+      }
+    }
+  },
+  "/api/v2/evolution-chain/": {
+    "get": {
+      "params": {
+        "limit": 20,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/evolution-chain/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "1"
+      }
+    }
+  },
+  "/api/v2/evolution-trigger/": {
+    "get": {
+      "params": {
+        "limit": 10,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/evolution-trigger/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "level-up"
+      }
+    }
+  },
+  "/api/v2/generation/": {
+    "get": {
+      "params": {
+        "limit": 20,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/generation/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "generation-i"
+      }
+    }
+  },
+  "/api/v2/gender/": {
+    "get": {
+      "params": {
+        "limit": 10,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/gender/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "female"
+      }
+    }
+  },
+  "/api/v2/growth-rate/": {
+    "get": {
+      "params": {
+        "limit": 10,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/growth-rate/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "slow"
+      }
+    }
+  },
+  "/api/v2/item/": {
+    "get": {
+      "params": {
+        "limit": 20,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/item/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "master-ball"
+      }
+    }
+  },
+  "/api/v2/item-category/": {
+    "get": {
+      "params": {
+        "limit": 20,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/item-category/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "stat-boosts"
+      }
+    }
+  },
+  "/api/v2/item-attribute/": {
+    "get": {
+      "params": {
+        "limit": 20,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/item-attribute/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "consumable"
+      }
+    }
+  },
+  "/api/v2/item-fling-effect/": {
+    "get": {
+      "params": {
+        "limit": 20,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/item-fling-effect/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "badly-poison"
+      }
+    }
+  },
+  "/api/v2/item-pocket/": {
+    "get": {
+      "params": {
+        "limit": 10,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/item-pocket/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "misc"
+      }
+    }
+  },
+  "/api/v2/language/": {
+    "get": {
+      "params": {
+        "limit": 20,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/language/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "en"
+      }
+    }
+  },
+  "/api/v2/location/": {
+    "get": {
+      "params": {
+        "limit": 20,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/location/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "canalave-city"
+      }
+    }
+  },
+  "/api/v2/location-area/": {
+    "get": {
+      "params": {
+        "limit": 20,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/location-area/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "1"
+      }
+    }
+  },
+  "/api/v2/machine/": {
+    "get": {
+      "params": {
+        "limit": 20,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/machine/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "1"
+      }
+    }
+  },
+  "/api/v2/move/": {
+    "get": {
+      "params": {
+        "limit": 20,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/move/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "pound"
+      }
+    }
+  },
+  "/api/v2/move-ailment/": {
+    "get": {
+      "params": {
+        "limit": 20,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/move-ailment/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "paralysis"
+      }
+    }
+  },
+  "/api/v2/move-battle-style/": {
+    "get": {
+      "params": {
+        "limit": 10,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/move-battle-style/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "attack"
+      }
+    }
+  },
+  "/api/v2/move-category/": {
+    "get": {
+      "params": {
+        "limit": 20,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/move-category/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "ailment"
+      }
+    }
+  },
+  "/api/v2/move-damage-class/": {
+    "get": {
+      "params": {
+        "limit": 10,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/move-damage-class/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "physical"
+      }
+    }
+  },
+  "/api/v2/move-learn-method/": {
+    "get": {
+      "params": {
+        "limit": 20,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/move-learn-method/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "level-up"
+      }
+    }
+  },
+  "/api/v2/move-target/": {
+    "get": {
+      "params": {
+        "limit": 20,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/move-target/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "specific-move"
+      }
+    }
+  },
+  "/api/v2/nature/": {
+    "get": {
+      "params": {
+        "limit": 20,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/nature/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "bold"
+      }
+    }
+  },
+  "/api/v2/pal-park-area/": {
+    "get": {
+      "params": {
+        "limit": 10,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/pal-park-area/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "forest"
+      }
+    }
+  },
+  "/api/v2/pokedex/": {
+    "get": {
+      "params": {
+        "limit": 20,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/pokedex/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "national"
+      }
+    }
+  },
+  "/api/v2/pokemon/": {
+    "get": {
+      "params": {
+        "limit": 20,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/pokemon/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "pikachu"
+      }
+    }
+  },
+  "/api/v2/pokemon/{pokemon_id}/encounters": {
+    "get": {
+      "path_params": {
+        "pokemon_id": "25"
+      }
+    }
+  },
+  "/api/v2/pokemon-color/": {
+    "get": {
+      "params": {
+        "limit": 10,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/pokemon-color/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "red"
+      }
+    }
+  },
+  "/api/v2/pokemon-form/": {
+    "get": {
+      "params": {
+        "limit": 20,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/pokemon-form/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "pikachu"
+      }
+    }
+  },
+  "/api/v2/pokemon-habitat/": {
+    "get": {
+      "params": {
+        "limit": 10,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/pokemon-habitat/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "cave"
+      }
+    }
+  },
+  "/api/v2/pokemon-shape/": {
+    "get": {
+      "params": {
+        "limit": 20,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/pokemon-shape/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "ball"
+      }
+    }
+  },
+  "/api/v2/pokemon-species/": {
+    "get": {
+      "params": {
+        "limit": 20,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/pokemon-species/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "pikachu"
+      }
+    }
+  },
+  "/api/v2/pokeathlon-stat/": {
+    "get": {
+      "params": {
+        "limit": 10,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/pokeathlon-stat/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "speed"
+      }
+    }
+  },
+  "/api/v2/region/": {
+    "get": {
+      "params": {
+        "limit": 20,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/region/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "kanto"
+      }
+    }
+  },
+  "/api/v2/stat/": {
+    "get": {
+      "params": {
+        "limit": 20,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/stat/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "hp"
+      }
+    }
+  },
+  "/api/v2/super-contest-effect/": {
+    "get": {
+      "params": {
+        "limit": 20,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/super-contest-effect/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "1"
+      }
+    }
+  },
+  "/api/v2/type/": {
+    "get": {
+      "params": {
+        "limit": 20,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/type/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "fire"
+      }
+    }
+  },
+  "/api/v2/version/": {
+    "get": {
+      "params": {
+        "limit": 20,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/version/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "red"
+      }
+    }
+  },
+  "/api/v2/version-group/": {
+    "get": {
+      "params": {
+        "limit": 20,
+        "offset": 0
+      }
+    }
+  },
+  "/api/v2/version-group/{id}/": {
+    "get": {
+      "path_params": {
+        "id": "red-blue"
+      }
+    }
+  }
+}
