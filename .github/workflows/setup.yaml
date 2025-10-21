@@ -22,3 +22,25 @@ jobs:
         run: |
           python -m pytest tests/ -v
         continue-on-error: true
+
+      - name: Validate example API
+        run: |
+          python src/main.py validate specs/example_spec.yaml \
+            --test-data examples/test_data.json \
+            --output-format html
+        continue-on-error: true
+
+      - name: Quick validate PokéAPI
+        run: |
+          python src/main.py validate specs/pokeapi_spec.yaml \
+            --test-data examples/pokeapi_test_data.json \
+            --output-format html
+        continue-on-error: true
+
+      - name: Upload reports
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: validation-reports
+          path: reports/
+          retention-days: 30
